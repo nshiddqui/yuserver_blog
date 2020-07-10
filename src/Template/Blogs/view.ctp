@@ -6,7 +6,7 @@ $this->assign('title', $blog['blog_content']->title);
         <div class="row">
             <div class="col-lg-8 ftco-animate fadeInUp ftco-animated">
                 <p class="mb-5">
-                    <?= $this->Html->image('blog/' . $blog['blog_content']->image, ['alt' => $blog['blog_content']->image, 'class' => 'img-fluid']) ?>
+                    <?= $this->Html->image($blog['blog_content']->image, ['alt' => $blog['blog_content']->image, 'class' => 'img-fluid']) ?>
                 </p>
                 <h2 class="mb-3"><?= $blog['blog_content']->title ?></h2>
                 <?= $blog['blog_content']->content ?>
