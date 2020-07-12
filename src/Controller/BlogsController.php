@@ -63,6 +63,7 @@ class BlogsController extends AppController {
                     ],
                     'contain' => ['BlogContents', 'Comments'],
                 ])->first();
+        $this->Blogs->updateAll('views = views + 1', array('slug' => $slug));
         $recent_blogs = $this->Blogs->find('all', [
             'order' => [
                 'Blogs.created'
