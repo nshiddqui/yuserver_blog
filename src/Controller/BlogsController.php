@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Http\Client;
+use Cake\Routing\Router;
 
 /**
  * Blogs Controller
@@ -16,7 +17,7 @@ class BlogsController extends AppController {
 
     public function initialize() {
         parent::initialize();
-        $this->Auth->allow(['index', 'articles', 'view', 'team', 'contact','initialBlog']);
+        $this->Auth->allow(['index', 'articles', 'view', 'team', 'contact','initialBlog','xmlReport']);
     }
 
     /**
@@ -209,9 +210,9 @@ class BlogsController extends AppController {
                 'country' => 'in',
                 'sortBy' => 'popularity',
             ]);
-        $search = 0;
         $topHeadlines = $response->getJson();
         if(!empty($topHeadlines['articles'])){
+            $count = 0;
             foreach($topHeadlines['articles'] as $article){
                 $slug = str_replace(' ', '-', $article['title']);
                 if($this->Blogs->findBySlug($slug)->count() === 0){
@@ -232,6 +233,7 @@ class BlogsController extends AppController {
                     ]);
                     $content = $response->getJson();
                     if(!isset($content['article'])){
+                        echo "Total Data inserted: {$count}";
                         echo 'Time execed';
                         die;
                     }
@@ -246,11 +248,35 @@ class BlogsController extends AppController {
                     ];
                     $blog = $this->Blogs->patchEntity($blog, $data);
                     $this->Blogs->save($blog);
+                    $count++;
                 }
             }
         }
         echo "Work completed";
         die;
+    }
+
+    public function xmlReport(){
+        $pages = $this->Blogs->find();
+        $urls = [];
+        foreach ($pages as $page) {
+            $urls[] = [
+                'loc' => Router::url($page->slug,['_full' => true]),
+                'lastmod' => $page->modified->format('Y-m-d'),
+                'changefreq' => 'daily',
+                'priority' => '0.5'
+            ];
+        }
+        $this->RequestHandler->renderAs($this, 'xml');
+
+        // Define a custom root node in the generated document.
+        $this->set('_rootNode', 'urlset');
+        $this->set([
+            // Define an attribute on the root node.
+            '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+            'url' => $urls
+        ]);  
+        $this->set('_serialize', ['@xmlns', 'url']);
     }
 
 }

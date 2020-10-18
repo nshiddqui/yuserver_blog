@@ -79,6 +79,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
     $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout']);
     $routes->connect('/new-post', ['controller' => 'Blogs', 'action' => 'add']);
+    $routes->connect('/sitemap.xml', ['controller' => 'Blogs', 'action' => 'xmlReport']);
     /**
      * Connect catchall routes for all controllers.
      *
