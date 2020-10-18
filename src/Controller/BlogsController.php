@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Http\Client;
 
 /**
  * Blogs Controller
@@ -15,7 +16,7 @@ class BlogsController extends AppController {
 
     public function initialize() {
         parent::initialize();
-        $this->Auth->allow(['index', 'articles', 'view', 'team', 'contact']);
+        $this->Auth->allow(['index', 'articles', 'view', 'team', 'contact','initialBlog']);
     }
 
     /**
@@ -107,7 +108,7 @@ class BlogsController extends AppController {
     }
 
     public function uploadImage($file) {
-        $target_dir = WWW_ROOT . "/img/";
+        $target_dir = WWW_ROOT . "img/";
         $image_name = 'blog/' . time() . basename($file["name"]);
         $target_file = $target_dir . $image_name;
         $uploadOk = 1;
@@ -197,6 +198,59 @@ class BlogsController extends AppController {
 
     public function contact() {
         $this->set('header', 'Contact us');
+    }
+
+    public function initialBlog()
+    {
+        $this->httpClient = new Client();
+        $response = $this->httpClient->get('https://newsapi.org/v2/top-headlines', [
+                'apiKey' => '58435a02bc2147078fb991cb34a65c4f',
+                'category' => 'technology',
+                'country' => 'in',
+                'sortBy' => 'popularity',
+            ]);
+        $search = 0;
+        $topHeadlines = $response->getJson();
+        if(!empty($topHeadlines['articles'])){
+            foreach($topHeadlines['articles'] as $article){
+                $slug = str_replace(' ', '-', $article['title']);
+                if($this->Blogs->findBySlug($slug)->count() === 0){
+                    $blog = $this->Blogs->newEntity([
+                        'contain' => ['BlogContents']
+                    ]);
+                    $target_dir = WWW_ROOT . "img/";
+                    $image_name = 'blog/' . time() . basename($article['urlToImage']);
+                    $target_file = $target_dir . $image_name;
+                    file_put_contents($target_dir . $image_name , file_get_contents($article['urlToImage']));
+                    $response = $this->httpClient->get('https://rapidapi.p.rapidapi.com/v0/article',[
+                        'url' => $article['url'],
+                    ],[
+                        'headers' => [
+                            'x-rapidapi-host' => 'extract-news.p.rapidapi.com',
+                            'x-rapidapi-key' => '0975eaa22emsh838ef6943ae2108p1fe97cjsn69034e533326'
+                        ]
+                    ]);
+                    $content = $response->getJson();
+                    if(!isset($content['article'])){
+                        echo 'Time execed';
+                        die;
+                    }
+                    $data = [
+                        'slug' => $slug,
+                        'blog_content' => [
+                            'title' => $article['title'],
+                            'description' => $article['description'],
+                            'image' => $image_name,
+                            'content' => $content['article']['text']
+                        ]
+                    ];
+                    $blog = $this->Blogs->patchEntity($blog, $data);
+                    $this->Blogs->save($blog);
+                }
+            }
+        }
+        echo "Work completed";
+        die;
     }
 
 }
