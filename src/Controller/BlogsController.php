@@ -258,13 +258,45 @@ class BlogsController extends AppController {
 
     public function xmlReport(){
         $pages = $this->Blogs->find();
-        $urls = [];
+        $urls = [
+            [
+                'loc' => Router::url('/',['_full' => true]),
+                'lastmod' => date('Y-m-d'),
+                'changefreq' => 'daily',
+                'priority' => '1.00'
+            ],
+            [
+                'loc' => Router::url('/articles',['_full' => true]),
+                'lastmod' => date('Y-m-d'),
+                'changefreq' => 'daily',
+                'priority' => '0.80'
+            ],
+            [
+                'loc' => Router::url('/team',['_full' => true]),
+                'lastmod' => '2020-07-12',
+                'priority' => '0.80'
+            ],
+            [
+                'loc' => Router::url('/contact',['_full' => true]),
+                'lastmod' => '2020-07-12',
+                'priority' => '0.80'
+            ],
+            [
+                'loc' => Router::url('/login',['_full' => true]),
+                'lastmod' => '2020-07-12',
+                'priority' => '0.80'
+            ],
+            [
+                'loc' => Router::url('/about',['_full' => true]),
+                'lastmod' => '2020-07-12',
+                'priority' => '0.80'
+            ]
+        ];
         foreach ($pages as $page) {
             $urls[] = [
                 'loc' => Router::url($page->slug,['_full' => true]),
                 'lastmod' => $page->modified->format('Y-m-d'),
-                'changefreq' => 'daily',
-                'priority' => '0.5'
+                'priority' => '0.50'
             ];
         }
         $this->RequestHandler->renderAs($this, 'xml');
