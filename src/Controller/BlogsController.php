@@ -214,7 +214,7 @@ class BlogsController extends AppController {
         if(!empty($topHeadlines['articles'])){
             $count = 0;
             foreach($topHeadlines['articles'] as $article){
-                $slug = str_replace(' ', '-', $article['title']);
+                $slug = str_replace(' ', '-', preg_replace("~[^A-Za-z0-9:]~i", "", $article['title']));
                 if($this->Blogs->findBySlug($slug)->count() === 0){
                     $blog = $this->Blogs->newEntity([
                         'contain' => ['BlogContents']
