@@ -2,7 +2,7 @@
 $this->assign('title', $blog['blog_content']->title);
 $this->assign('description', $blog['blog_content']->description);
 $this->assign('keywords', $blog['blog_content']->keywords);
-$this->assign('image', '//img/'.$blog['blog_content']->image);
+$this->assign('image', '/img/'.$blog['blog_content']->image);
 ?>
 <?= $this->Html->meta('keywords', 'enter any meta keyword here') ?>
 <section class="ftco-section ftco-degree-bg">
