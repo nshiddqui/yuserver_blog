@@ -31,6 +31,7 @@ class BlogContent extends Entity
      */
     protected $_accessible = [
         'blog_id' => true,
+        'keywords' => true,
         'title' => true,
         'description' => true,
         'content' => true,

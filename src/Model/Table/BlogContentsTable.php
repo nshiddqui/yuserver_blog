@@ -59,6 +59,11 @@ class BlogContentsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
+            ->scalar('keywords')
+            ->maxLength('keywords', 255)
+            ->allowEmptyString('keywords');
+
+        $validator
             ->scalar('title')
             ->maxLength('title', 512)
             ->requirePresence('title', 'create')

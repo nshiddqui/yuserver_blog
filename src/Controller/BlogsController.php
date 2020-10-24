@@ -214,7 +214,7 @@ class BlogsController extends AppController {
         if(!empty($topHeadlines['articles'])){
             $count = 0;
             foreach($topHeadlines['articles'] as $article){
-                $slug = str_replace(' ', '-', preg_replace("~[^A-Za-z0-9:]~i", "", $article['title']));
+                $slug = str_replace(' ', '-', preg_replace("~[^A-Za-z0-9 ]~i", "", $article['title']));
                 if($this->Blogs->findBySlug($slug)->count() === 0){
                     $blog = $this->Blogs->newEntity([
                         'contain' => ['BlogContents']
@@ -233,13 +233,14 @@ class BlogsController extends AppController {
                     ]);
                     $content = $response->getJson();
                     if(!isset($content['article'])){
-                        echo "Total Data inserted: {$count}";
+                        echo "Total Data inserted: {$count} \n";
                         echo 'Time execed';
                         die;
                     }
                     $data = [
                         'slug' => $slug,
                         'blog_content' => [
+                            'keywords' => implode(',',$content['article']['meta_keywords']),
                             'title' => $article['title'],
                             'description' => $article['description'],
                             'image' => $image_name,
@@ -252,7 +253,8 @@ class BlogsController extends AppController {
                 }
             }
         }
-        echo "Work completed";
+        echo "Work completed\n";
+        echo "Total record checked".count($topHeadlines['articles']);
         die;
     }
 

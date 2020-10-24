@@ -1,6 +1,9 @@
 <?php
 $this->assign('title', $blog['blog_content']->title);
+$this->assign('description', $blog['blog_content']->description);
+$this->assign('keywords', $blog['blog_content']->keywords);
 ?>
+<?= $this->Html->meta('keywords', 'enter any meta keyword here') ?>
 <section class="ftco-section ftco-degree-bg">
     <div class="container">
         <div class="row">
@@ -49,7 +52,7 @@ $this->assign('title', $blog['blog_content']->title);
                         <div class="block-21 mb-4 d-flex">
                             <a class="blog-img mr-4" style="background-image: url(/img/<?= $recent_blog['blog_content']->image ?>);"></a>
                             <div class="text">
-                                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                                <h3 class="heading"><?= $this->Html->link($recent_blog['blog_content']->title, $recent_blog->slug) ?></h3>
                                 <div class="meta">
                                     <div><span class="icon-calendar"></span> <?= date('M. d, Y', strtotime($recent_blog->created)) ?></div>
                                     <div><span class="icon-chat"></span> <?= count($recent_blog['comments']) ?></div>
