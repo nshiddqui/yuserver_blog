@@ -2,7 +2,7 @@
 $this->assign('title', $blog['blog_content']->title);
 $this->assign('description', $blog['blog_content']->description);
 $this->assign('keywords', $blog['blog_content']->keywords);
-$this->assign('image', '/img/'.$blog['blog_content']->image);
+$this->assign('image', '/img/' . $blog['blog_content']->image);
 ?>
 <?= $this->Html->meta('keywords', 'enter any meta keyword here') ?>
 <section class="ftco-section ftco-degree-bg">
@@ -13,6 +13,12 @@ $this->assign('image', '/img/'.$blog['blog_content']->image);
                     <?= $this->Html->image($blog['blog_content']->image, ['alt' => $blog['blog_content']->image, 'class' => 'img-fluid w-100']) ?>
                 </p>
                 <h2 class="mb-3"><?= $blog['blog_content']->title ?></h2>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Horizontal Ad -->
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6607550822593779" data-ad-slot="7274936351" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <?= $blog['blog_content']->content ?>
                 <div class="pt-5 mt-5">
                     <h3 class="mb-5"><?= count($blog['comments']) ?> Comments</h3>
@@ -61,6 +67,18 @@ $this->assign('image', '/img/'.$blog['blog_content']->image);
                             </div>
                         </div>
                     <?php } ?>
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Vertical Ad -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6607550822593779" data-ad-slot="8459847908" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Vertical Ad -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6607550822593779" data-ad-slot="8459847908" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
             </div>
 
