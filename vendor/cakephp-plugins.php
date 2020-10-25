@@ -4,6 +4,7 @@ return [
     'plugins' => [
         'Bake' => $baseDir . '/vendor/cakephp/bake/',
         'DebugKit' => $baseDir . '/vendor/cakephp/debug_kit/',
+        'Kerox/Push' => $baseDir . '/vendor/ker0x/cakephp-push/',
         'Migrations' => $baseDir . '/vendor/cakephp/migrations/',
         'WyriHaximus/TwigView' => $baseDir . '/vendor/wyrihaximus/twig-view/'
     ]

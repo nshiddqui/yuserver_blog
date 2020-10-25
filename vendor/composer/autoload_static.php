@@ -79,6 +79,10 @@ class ComposerStaticInitae51a674d8f8184c81ac0a3ef42877a3
             'Migrations\\' => 11,
             'M1\\Env\\' => 7,
         ),
+        'K' => 
+        array (
+            'Kerox\\Push\\' => 11,
+        ),
         'J' => 
         array (
             'JsonSchema\\' => 11,
@@ -227,6 +231,10 @@ class ComposerStaticInitae51a674d8f8184c81ac0a3ef42877a3
         'M1\\Env\\' => 
         array (
             0 => __DIR__ . '/..' . '/m1/env/src',
+        ),
+        'Kerox\\Push\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ker0x/cakephp-push/src',
         ),
         'JsonSchema\\' => 
         array (

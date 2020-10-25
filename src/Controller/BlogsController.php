@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Http\Client;
 use Cake\Routing\Router;
+use Kerox\Push\Adapter\Fcm;
+use Kerox\Push\Push;
 
 /**
  * Blogs Controller
@@ -13,11 +15,13 @@ use Cake\Routing\Router;
  *
  * @method \App\Model\Entity\Blog[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class BlogsController extends AppController {
+class BlogsController extends AppController
+{
 
-    public function initialize() {
+    public function initialize()
+    {
         parent::initialize();
-        $this->Auth->allow(['index', 'articles', 'view', 'team', 'contact','initialBlog','xmlReport']);
+        $this->Auth->allow(['index', 'articles', 'view', 'team', 'contact', 'initialBlog', 'xmlReport', 'addToken']);
     }
 
     /**
@@ -25,7 +29,8 @@ class BlogsController extends AppController {
      *
      * @return \Cake\Http\Response|null
      */
-    public function index() {
+    public function index()
+    {
         $trendings = $this->paginate($this->Blogs, [
             'contain' => ['BlogContents'],
             'order' => ['BlogContents.views'],
@@ -33,7 +38,8 @@ class BlogsController extends AppController {
         $this->set(compact('trendings'));
     }
 
-    public function articles() {
+    public function articles()
+    {
         $recent_articles = $this->paginate($this->Blogs, [
             'contain' => ['BlogContents'],
             'order' => ['BlogContents.created'],
@@ -49,7 +55,8 @@ class BlogsController extends AppController {
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($slug = null) {
+    public function view($slug = null)
+    {
         $this->loadModel('Comments');
         $comment = $this->Comments->newEntity();
         if ($this->request->is('post')) {
@@ -60,11 +67,11 @@ class BlogsController extends AppController {
             $this->Flash->error(__('The comment could not be saved. Please, try again.'));
         }
         $blog = $this->Blogs->find('all', [
-                    'conditions' => [
-                        'Blogs.slug' => $slug
-                    ],
-                    'contain' => ['BlogContents', 'Comments'],
-                ])->first();
+            'conditions' => [
+                'Blogs.slug' => $slug
+            ],
+            'contain' => ['BlogContents', 'Comments'],
+        ])->first();
         $this->loadModel('BlogContents');
         $this->BlogContents->updateAll(['views' => $blog['blog_content']->views + 1], array('blog_id' => $blog->id));
         $recent_blogs = $this->Blogs->find('all', [
@@ -84,7 +91,8 @@ class BlogsController extends AppController {
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add() {
+    public function add()
+    {
         $blog = $this->Blogs->newEntity([
             'contain' => ['BlogContents']
         ]);
@@ -108,14 +116,15 @@ class BlogsController extends AppController {
         $this->set(compact('blog'));
     }
 
-    public function uploadImage($file) {
+    public function uploadImage($file)
+    {
         $target_dir = WWW_ROOT . "img/";
         $image_name = 'blog/' . time() . basename($file["name"]);
         $target_file = $target_dir . $image_name;
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-// Check if image file is a actual image or fake image
+        // Check if image file is a actual image or fake image
         $check = getimagesize($file["tmp_name"]);
         if ($check !== false) {
             $uploadOk = 1;
@@ -123,25 +132,25 @@ class BlogsController extends AppController {
             $uploadOk = 0;
         }
 
-// Check if file already exists
+        // Check if file already exists
         if (file_exists($target_file)) {
             $uploadOk = 0;
         }
 
-// Check file size
+        // Check file size
         if ($file["size"] > 500000) {
             $uploadOk = 0;
         }
 
-// Allow certain file formats
+        // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
             $uploadOk = 0;
         }
 
-// Check if $uploadOk is set to 0 by an error
+        // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
             return false;
-// if everything is ok, try to upload file
+            // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($file["tmp_name"], $target_file)) {
                 return $image_name;
@@ -158,7 +167,8 @@ class BlogsController extends AppController {
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null) {
+    public function edit($id = null)
+    {
         $blog = $this->Blogs->get($id, [
             'contain' => [],
         ]);
@@ -181,7 +191,8 @@ class BlogsController extends AppController {
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null) {
+    public function delete($id = null)
+    {
         $this->request->allowMethod(['post', 'delete']);
         $blog = $this->Blogs->get($id);
         if ($this->Blogs->delete($blog)) {
@@ -193,46 +204,49 @@ class BlogsController extends AppController {
         return $this->redirect(['action' => 'index']);
     }
 
-    public function team() {
+    public function team()
+    {
         $this->set('header', 'About');
     }
 
-    public function contact() {
+    public function contact()
+    {
         $this->set('header', 'Contact us');
     }
 
     public function initialBlog()
     {
+        $this->loadModel('Tokens');
         $this->httpClient = new Client();
         $response = $this->httpClient->get('https://newsapi.org/v2/top-headlines', [
-                'apiKey' => '58435a02bc2147078fb991cb34a65c4f',
-                'category' => 'technology',
-                'country' => 'in',
-                'sortBy' => 'popularity',
-            ]);
+            'apiKey' => '58435a02bc2147078fb991cb34a65c4f',
+            'category' => 'technology',
+            'country' => 'in',
+            'sortBy' => 'popularity',
+        ]);
+        $tokens = $this->Tokens->find('list')->toArray();
         $topHeadlines = $response->getJson();
-        if(!empty($topHeadlines['articles'])){
+        if (!empty($topHeadlines['articles'])) {
             $count = 0;
-            foreach($topHeadlines['articles'] as $article){
+            foreach ($topHeadlines['articles'] as $article) {
                 $slug = str_replace(' ', '-', preg_replace("~[^A-Za-z0-9 ]~i", "", $article['title']));
-                if($this->Blogs->findBySlug($slug)->count() === 0){
+                if ($this->Blogs->findBySlug($slug)->count() === 0) {
                     $blog = $this->Blogs->newEntity([
                         'contain' => ['BlogContents']
                     ]);
                     $target_dir = WWW_ROOT . "img/";
                     $image_name = 'blog/' . time() . basename($article['urlToImage']);
-                    $target_file = $target_dir . $image_name;
-                    file_put_contents($target_dir . $image_name , file_get_contents($article['urlToImage']));
-                    $response = $this->httpClient->get('https://rapidapi.p.rapidapi.com/v0/article',[
+                    file_put_contents($target_dir . $image_name, file_get_contents($article['urlToImage']));
+                    $response = $this->httpClient->get('https://rapidapi.p.rapidapi.com/v0/article', [
                         'url' => $article['url'],
-                    ],[
+                    ], [
                         'headers' => [
                             'x-rapidapi-host' => 'extract-news.p.rapidapi.com',
                             'x-rapidapi-key' => '0975eaa22emsh838ef6943ae2108p1fe97cjsn69034e533326'
                         ]
                     ]);
                     $content = $response->getJson();
-                    if(!isset($content['article'])){
+                    if (!isset($content['article'])) {
                         echo "Total Data inserted: {$count} \n";
                         echo 'Time execed';
                         die;
@@ -240,7 +254,7 @@ class BlogsController extends AppController {
                     $data = [
                         'slug' => $slug,
                         'blog_content' => [
-                            'keywords' => implode(',',$content['article']['meta_keywords']),
+                            'keywords' => implode(',', $content['article']['meta_keywords']),
                             'title' => $article['title'],
                             'description' => $article['description'],
                             'image' => $image_name,
@@ -249,54 +263,69 @@ class BlogsController extends AppController {
                     ];
                     $blog = $this->Blogs->patchEntity($blog, $data);
                     $this->Blogs->save($blog);
+                    $adapter = new Fcm();
+                    $adapter
+                        ->setTokens($tokens)
+                        ->setNotification([
+                            'title' => $article['title'],
+                            'body' => $article['description'],
+                            'icon' =>  Router::url('/img/' . $image_name, ['_full' => true]),
+                            'click_action' => Router::url($slug, ['_full' => true])
+                        ]);
+
+                    $push = new Push($adapter);
+
+                    // Make the push
+                    $push->send();
                     $count++;
                 }
             }
         }
         echo "Work completed\n";
-        echo "Total record checked".count($topHeadlines['articles']);
+        echo "Total record checked" . count($topHeadlines['articles']);
         die;
     }
 
-    public function xmlReport(){
+    public function xmlReport()
+    {
         $pages = $this->Blogs->find();
         $urls = [
             [
-                'loc' => Router::url('/',['_full' => true]),
+                'loc' => Router::url('/', ['_full' => true]),
                 'lastmod' => date('Y-m-d'),
                 'changefreq' => 'daily',
                 'priority' => '1.00'
             ],
             [
-                'loc' => Router::url('/articles',['_full' => true]),
+                'loc' => Router::url('/articles', ['_full' => true]),
                 'lastmod' => date('Y-m-d'),
                 'changefreq' => 'daily',
                 'priority' => '0.80'
             ],
             [
-                'loc' => Router::url('/team',['_full' => true]),
+                'loc' => Router::url('/team', ['_full' => true]),
                 'lastmod' => '2020-07-12',
                 'priority' => '0.80'
             ],
             [
-                'loc' => Router::url('/contact',['_full' => true]),
+                'loc' => Router::url('/contact', ['_full' => true]),
                 'lastmod' => '2020-07-12',
                 'priority' => '0.80'
             ],
             [
-                'loc' => Router::url('/login',['_full' => true]),
+                'loc' => Router::url('/login', ['_full' => true]),
                 'lastmod' => '2020-07-12',
                 'priority' => '0.80'
             ],
             [
-                'loc' => Router::url('/about',['_full' => true]),
+                'loc' => Router::url('/about', ['_full' => true]),
                 'lastmod' => '2020-07-12',
                 'priority' => '0.80'
             ]
         ];
         foreach ($pages as $page) {
             $urls[] = [
-                'loc' => Router::url($page->slug,['_full' => true]),
+                'loc' => Router::url($page->slug, ['_full' => true]),
                 'lastmod' => $page->modified->format('Y-m-d'),
                 'priority' => '0.50'
             ];
@@ -309,8 +338,18 @@ class BlogsController extends AppController {
             // Define an attribute on the root node.
             '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
             'url' => $urls
-        ]);  
+        ]);
         $this->set('_serialize', ['@xmlns', 'url']);
     }
 
+    public function addToken()
+    {
+        $this->loadModel('Tokens');
+        $token = $this->Tokens->newEntity();
+        $token = $this->Tokens->patchEntity($token, ['token' => $this->request->getQuery('token')]);
+        $this->Tokens->save($token);
+        $this->RequestHandler->renderAs($this, 'json');
+        $this->set('response', 'Token added successfull');
+        $this->set('_serialize', ['response']);
+    }
 }

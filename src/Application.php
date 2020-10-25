@@ -49,6 +49,8 @@ class Application extends BaseApplication
             $this->addPlugin(\DebugKit\Plugin::class);
         }
 
+        $this->addPlugin('Kerox/Push');
+
         // Load more plugins here
     }
 

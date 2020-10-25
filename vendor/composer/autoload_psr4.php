@@ -33,6 +33,7 @@ return array(
     'Phinx\\' => array($vendorDir . '/robmorgan/phinx/src/Phinx'),
     'Migrations\\' => array($vendorDir . '/cakephp/migrations/src'),
     'M1\\Env\\' => array($vendorDir . '/m1/env/src'),
+    'Kerox\\Push\\' => array($vendorDir . '/ker0x/cakephp-push/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
     'Jasny\\Twig\\' => array($vendorDir . '/jasny/twig-extensions/src'),
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),

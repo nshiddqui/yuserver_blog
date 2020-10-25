@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bae3f640a631a993a49129d353eefbf9",
+    "content-hash": "5c69d43299eadad5476a614f6864a83a",
     "packages": [
         {
             "name": "aura/intl",
@@ -290,6 +290,56 @@
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
             "time": "2019-11-12T10:21:19+00:00"
+        },
+        {
+            "name": "ker0x/cakephp-push",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ker0x/cakephp-push.git",
+                "reference": "52e78e210a104a493e51304955302ed27d40c492"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ker0x/cakephp-push/zipball/52e78e210a104a493e51304955302ed27d40c492",
+                "reference": "52e78e210a104a493e51304955302ed27d40c492",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": ">=3.4.0 < 4.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "^2.0",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Kerox\\Push\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Romain Monteil",
+                    "email": "monteil.romain@gmail.com",
+                    "homepage": "http://kerox.fr",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP plugin to send push notification through services like FCM",
+            "homepage": "https://github.com/ker0x/cakephp-push",
+            "keywords": [
+                "FCM",
+                "cakephp",
+                "notification",
+                "push"
+            ],
+            "time": "2018-08-05T08:09:16+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -3868,5 +3918,6 @@
     "platform": {
         "php": ">=5.6"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
