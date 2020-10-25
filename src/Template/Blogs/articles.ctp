@@ -24,14 +24,14 @@ $this->assign('title', 'Latest Articles');
                         </div>
                     </div>
                 </div>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Horizontal Ad -->
-                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6607550822593779" data-ad-slot="7274936351" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             <?php } ?>
         </div>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Horizontal Ad -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6607550822593779" data-ad-slot="7274936351" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
         <div class="row mt-5">
             <div class="col text-center">
                 <div class="block-27">
