@@ -3,27 +3,27 @@ AOS.init({
     easing: 'slide'
 });
 
-(function ($) {
+(function($) {
 
     "use strict";
 
     var isMobile = {
-        Android: function () {
+        Android: function() {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function () {
+        BlackBerry: function() {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function () {
+        iOS: function() {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function () {
+        Opera: function() {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function () {
+        Windows: function() {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function () {
+        any: function() {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
@@ -39,10 +39,10 @@ AOS.init({
     });
 
 
-    var fullHeight = function () {
+    var fullHeight = function() {
 
         $('.js-fullheight').css('height', $(window).height());
-        $(window).resize(function () {
+        $(window).resize(function() {
             $('.js-fullheight').css('height', $(window).height());
         });
 
@@ -50,8 +50,8 @@ AOS.init({
     fullHeight();
 
     // loader
-    var loader = function () {
-        setTimeout(function () {
+    var loader = function() {
+        setTimeout(function() {
             if ($('#ftco-loader').length > 0) {
                 $('#ftco-loader').removeClass('show');
             }
@@ -62,7 +62,7 @@ AOS.init({
     // Scrollax
     $.Scrollax();
 
-    var carousel = function () {
+    var carousel = function() {
         $('.carousel-testimony').owlCarousel({
             center: true,
             loop: true,
@@ -87,7 +87,7 @@ AOS.init({
     };
     carousel();
 
-    $('nav .dropdown').hover(function () {
+    $('nav .dropdown').hover(function() {
         var $this = $(this);
         // 	 timer;
         // clearTimeout(timer);
@@ -95,7 +95,7 @@ AOS.init({
         $this.find('> a').attr('aria-expanded', true);
         // $this.find('.dropdown-menu').addClass('animated-fast fadeInUp show');
         $this.find('.dropdown-menu').addClass('show');
-    }, function () {
+    }, function() {
         var $this = $(this);
         // timer;
         // timer = setTimeout(function(){
@@ -107,17 +107,17 @@ AOS.init({
     });
 
 
-    $('#dropdown04').on('show.bs.dropdown', function () {
+    $('#dropdown04').on('show.bs.dropdown', function() {
         console.log('show');
     });
 
     // scroll
-    var scrollWindow = function () {
-        $(window).scroll(function () {
+    var scrollWindow = function() {
+        $(window).scroll(function() {
             var $w = $(this),
-                    st = $w.scrollTop(),
-                    navbar = $('.ftco_navbar'),
-                    sd = $('.js-scroll-wrap');
+                st = $w.scrollTop(),
+                navbar = $('.ftco_navbar'),
+                sd = $('.js-scroll-wrap');
 
             if (st > 150) {
                 if (!navbar.hasClass('scrolled')) {
@@ -152,67 +152,65 @@ AOS.init({
     scrollWindow();
 
     var isMobile = {
-        Android: function () {
+        Android: function() {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function () {
+        BlackBerry: function() {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function () {
+        iOS: function() {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function () {
+        Opera: function() {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function () {
+        Windows: function() {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function () {
+        any: function() {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     };
 
-    var counter = function () {
+    var counter = function() {
 
-        $('#section-counter, .hero-wrap, .ftco-counter').waypoint(function (direction) {
+        $('#section-counter, .hero-wrap, .ftco-counter').waypoint(function(direction) {
 
             if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
 
                 var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
-                $('.number').each(function () {
+                $('.number').each(function() {
                     var $this = $(this),
-                            num = $this.data('number');
+                        num = $this.data('number');
                     console.log(num);
-                    $this.animateNumber(
-                            {
-                                number: num,
-                                numberStep: comma_separator_number_step
-                            }, 7000
-                            );
+                    $this.animateNumber({
+                        number: num,
+                        numberStep: comma_separator_number_step
+                    }, 7000);
                 });
 
             }
 
-        }, {offset: '95%'});
+        }, { offset: '95%' });
 
     }
     counter();
 
 
-    var contentWayPoint = function () {
+    var contentWayPoint = function() {
         var i = 0;
-        $('.ftco-animate').waypoint(function (direction) {
+        $('.ftco-animate').waypoint(function(direction) {
 
             if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
 
                 i++;
 
                 $(this.element).addClass('item-animate');
-                setTimeout(function () {
+                setTimeout(function() {
 
-                    $('body .ftco-animate.item-animate').each(function (k) {
+                    $('body .ftco-animate.item-animate').each(function(k) {
                         var el = $(this);
-                        setTimeout(function () {
+                        setTimeout(function() {
                             var effect = el.data('animate-effect');
                             if (effect === 'fadeIn') {
                                 el.addClass('fadeIn ftco-animated');
@@ -231,7 +229,7 @@ AOS.init({
 
             }
 
-        }, {offset: '95%'});
+        }, { offset: '95%' });
     };
     contentWayPoint();
 
@@ -268,7 +266,7 @@ AOS.init({
         fixedContentPos: false
     });
 
-    $('#ftco-nav ul li a').each(function () {
+    $('#ftco-nav ul li a').each(function() {
         var url = $(this).attr('href');
         var pathname = window.location.pathname;
         if (url === pathname) {
@@ -277,5 +275,30 @@ AOS.init({
     });
 
 
-})(jQuery);
+    let searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.has('token')) {
+        if (searchParams.has('link')) {
+            if (searchParams.has('id')) {
+                $('.iframe_wrap iframe').iframeTracker(function(event) {
+                    $.ajax({
+                            method: "GET",
+                            url: 'https://yuserver.in/api/v1/click-events/add-user-click',
+                            data: {
+                                token: searchParams.get('token'),
+                                link: searchParams.get('link'),
+                                id: searchParams.get('id')
+                            }
+                        })
+                        .done(function(msg) {
+                            if (msg.success) {
+                                alert(msg.success);
+                            } else if (alert(msg.error)) {
+                                alert(msg.error);
+                            }
+                        });
+                });
+            }
+        }
+    }
 
+})(jQuery);

@@ -169,6 +169,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
     <?= $this->Html->script('aos') ?>
     <?= $this->Html->script('jquery.animateNumber.min') ?>
     <?= $this->Html->script('scrollax.min') ?>
+    <?= $this->Html->script('jquery.iframetracker.min') ?>
     <?= $this->Html->script('main') ?>
     <?= $this->Html->script('https://www.gstatic.com/firebasejs/7.24.0/firebase.js') ?>
     <?= $this->Html->script('firebase-notification-push') ?>
