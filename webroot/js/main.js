@@ -274,31 +274,4 @@ AOS.init({
         }
     });
 
-
-    let searchParams = new URLSearchParams(window.location.search);
-    if (searchParams.has('token')) {
-        if (searchParams.has('link')) {
-            if (searchParams.has('id')) {
-                $('.iframe_wrap iframe').iframeTracker(function(event) {
-                    $.ajax({
-                            method: "GET",
-                            url: 'https://yuserver.in/api/v1/click-events/add-user-click',
-                            data: {
-                                token: searchParams.get('token'),
-                                link: searchParams.get('link'),
-                                id: searchParams.get('id')
-                            }
-                        })
-                        .done(function(msg) {
-                            if (msg.success) {
-                                alert(msg.success);
-                            } else if (alert(msg.error)) {
-                                alert(msg.error);
-                            }
-                        });
-                });
-            }
-        }
-    }
-
 })(jQuery);
