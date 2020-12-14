@@ -79,8 +79,13 @@ class AdclickYuserver {
     }
 
     #callAjaxConfirmation() {
+        var data = JSON.stringify({
+            token: this.#token,
+            link: this.#link,
+            id: this.#id
+        });
         var xhr = new XMLHttpRequest();
-        var url = "https://yuserver.in/api/v1/click-events/add-user-click";
+        var url = "https://yuserver.in/api/v1/click-events/add-user-click?" + data;
         xhr.open("GET", url, true);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
@@ -89,11 +94,6 @@ class AdclickYuserver {
                 console.log(json);
             }
         };
-        var data = JSON.stringify({
-            token: this.#token,
-            link: this.#link,
-            id: this.#id
-        });
         xhr.send(data);
     }
 }
