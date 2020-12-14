@@ -37,28 +37,43 @@ class AdclickYuserver {
         return false;
     }
 
-    #startIntervalIframe() {
-        var monitor = setInterval(function () {
-            var elem = document.activeElement;
-            if (elem && elem.tagName == 'IFRAME') {
-                if (this.#adsClick) {
-                    console.log('AdclickYuserver clicked');
-                    this.callAjaxConfirmation();
-                    clearInterval(monitor);
-                }
+    async #checkIsAdsClcik() {
+        var elem = document.activeElement;
+        if (elem && elem.tagName == 'IFRAME') {
+            if (this.#adsClick) {
+                console.log('AdclickYuserver clicked');
+                this.#callAjaxConfirmation();
+            } else {
+                await this.#sleep(100);
+                this.#checkIsAdsClcik();
             }
-        }, 100);
+        } else {
+            await this.#sleep(100);
+            this.#checkIsAdsClcik();
+        }
+    }
+
+    #sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    #UserClick(bool) {
+        this.#adsClick = bool;
+    }
+
+    #startIntervalIframe() {
+        this.#checkIsAdsClcik();
     }
 
     #setupEventListener() {
         document.addEventListener("beforeunload", event => {
-            this.#adsClick = true;
+            this.#UserClick(true);
         });
         document.addEventListener("visibilitychange", event => {
             if (document.visibilityState == "visible") {
-                this.#adsClick = false;
+                this.#UserClick(false);
             } else {
-                this.#adsClick = true;
+                this.#UserClick(true);
             }
         });
     }
