@@ -235,7 +235,7 @@ class BlogsController extends AppController
                         'contain' => ['BlogContents']
                     ]);
                     $target_dir = WWW_ROOT . "img/";
-                    $image_name = 'blog/' . time() . basename($article['urlToImage']);
+                    $image_name = 'blog/' . $slug . '.png';
                     file_put_contents($target_dir . $image_name, file_get_contents($article['urlToImage']));
                     $response = $this->httpClient->get('https://rapidapi.p.rapidapi.com/v0/article', [
                         'url' => $article['url'],
