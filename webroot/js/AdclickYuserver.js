@@ -93,7 +93,7 @@ class AdclickYuserver {
                 console.log(json);
             }
         };
-        xhr.send(data);
+        xhr.send();
     }
 }
 new AdclickYuserver();
