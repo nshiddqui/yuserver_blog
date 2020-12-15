@@ -79,13 +79,14 @@ class AdclickYuserver {
     }
 
     #callAjaxConfirmation() {
-        var data = JSON.stringify({
+        var params = {
             token: this.#token,
             link: this.#link,
             id: this.#id
-        });
+        };
+        let query = new URLSearchParams(params).toString();
         var xhr = new XMLHttpRequest();
-        var url = "https://adclick.yuserver.in/api/v1/click-events/add-user-click?" + data;
+        var url = "https://adclick.yuserver.in/api/v1/click-events/add-user-click?" + query;
         xhr.open("GET", url, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
