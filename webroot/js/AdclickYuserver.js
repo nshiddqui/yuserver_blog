@@ -88,7 +88,7 @@ class AdclickYuserver {
         var url = "https://adclick.yuserver.in/api/v1/click-events/add-user-click?" + data;
         xhr.open("GET", url, true);
         xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var json = JSON.parse(xhr.responseText);
