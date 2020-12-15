@@ -88,6 +88,7 @@ class AdclickYuserver {
         var xhr = new XMLHttpRequest();
         var url = "https://adclick.yuserver.in/api/v1/click-events/add-user-click?" + query;
         xhr.open("GET", url, true);
+        xhr.setRequestHeader("Content-Type", "");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var json = JSON.parse(xhr.responseText);
