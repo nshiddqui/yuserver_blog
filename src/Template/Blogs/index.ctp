@@ -1,47 +1,39 @@
-<section class="ftco-section">
+<!--Main section-->
+<section class="section main-section parallax-scene-js" style="background:url('/img/bg-1-1700x803.jpg') no-repeat center center; background-size:cover;">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <?php foreach ($trendings as $trending) { ?>
-                    <div class="case">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6 col-xl-8 d-flex">
-                                <?= $this->Html->link(null, $trending->slug, ['class' => 'img w-100 mb-3 mb-md-0', 'style' => "background-image: url(/img/{$trending['blog_content']->image});"]) ?>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-xl-4 d-flex">
-                                <div class="text w-100 pl-md-3">
-                                    <h2><?= $this->Html->link($trending['blog_content']->title, $trending->slug) ?></h2>
-                                    <span class="subheading"><?= $trending['blog_content']->description ?></span>
-                                    <ul class="media-social list-unstyled">
-                                        <li class="ftco-animate"><?= $this->Html->link('<span class="icon-twitter"></span>', "https://twitter.com/share?text={$trending['blog_content']->title}&url=" . $this->Url->build($trending->slug, true), ['escape' => false]) ?></li>
-                                        <li class="ftco-animate"><?= $this->Html->link('<span class="icon-facebook"></span>', 'https://www.facebook.com/share.php?u=' . $this->Url->build($trending->slug, true), ['escape' => false]) ?></li>
-                                        <li class="ftco-animate"><?= $this->Html->link('<span class="icon-whatsapp"></span>', 'https://api.whatsapp.com/send?text=' . $this->Url->build($trending->slug, true), ['escape' => false]) ?></li>
-                                    </ul>
-                                    <div class="meta">
-                                        <p class="mb-0"><?= date('m/d/Y', strtotime($trending['blog_content']->created)) ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- Horizontal Ad -->
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6607550822593779" data-ad-slot="7274936351" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                <?php } ?>
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-12">
+                <div class="main-decorated-box text-center text-xl-left">
+                    <h1 class="text-white text-xl-center wow slideInRight" data-wow-delay=".3s"><span class="align-top offset-top-30 d-inline-block font-weight-light prefix-text">the</span><span class="big font-weight-bold d-inline-flex offset-right-170">best</span><span class="biggest d-block d-xl-flex font-weight-bold">Solutions.</span></h1>
+                    <div class="decorated-subtitle text-italic text-white wow slideInLeft">Fresh Ideas for Your Business</div>
+                </div>
+            </div>
+            <div class="col-12 text-center offset-top-75" data-wow-delay=".2s"><a class="button-way-point d-inline-block text-center d-inline-flex flex-column justify-content-center" href="#" data-custom-scroll-to="about"><span class="fa-chevron-down"></span></a></div>
+        </div>
+    </div>
+    <div class="decorate-layer">
+        <div class="layer-1">
+            <div class="layer" data-depth=".20"><img src="/img/parallax-item-1-563x532.png" alt="" width="563" height="266"/>
             </div>
         </div>
-        <div class="row mt-5">
-            <div class="col text-center">
-                <div class="block-27">
-                    <ul>
-                        <?= $this->Paginator->prev('<') ?>
-                        <?= $this->Paginator->numbers() ?>
-                        <?= $this->Paginator->next('>') ?>
-                    </ul>
-                </div>
+        <div class="layer-2">
+            <div class="layer" data-depth=".30"><img src="/img/parallax-item-2-276x343.png" alt="" width="276" height="171"/>
+            </div>
+        </div>
+        <div class="layer-3">
+            <div class="layer" data-depth=".40"><img src="/img/parallax-item-3-153x144.png" alt="" width="153" height="72"/>
+            </div>
+        </div>
+        <div class="layer-4">
+            <div class="layer" data-depth=".20"><img src="/img/parallax-item-4-69x74.png" alt="" width="69" height="37"/>
+            </div>
+        </div>
+        <div class="layer-5">
+            <div class="layer" data-depth=".40"><img src="/img/parallax-item-5-72x75.png" alt="" width="72" height="37"/>
+            </div>
+        </div>
+        <div class="layer-6">
+            <div class="layer" data-depth=".30"><img src="/img/parallax-item-6-45x54.png" alt="" width="45" height="27"/>
             </div>
         </div>
     </div>

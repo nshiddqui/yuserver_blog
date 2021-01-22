@@ -2,177 +2,181 @@
 $yuserverBaseTitle = 'Yuserver';
 $yuserverBaseDescription = 'the blogger and client best platform for blogging';
 $yuserverKeywords = (!empty($this->fetch('keywords')) ? $this->fetch('keywords') : 'yuserver, blogging, blogger, blog, developer');
-$yuserverTitle = ($this->request->getAttribute('here') === '/' ?  $yuserverBaseTitle . ': ' . $yuserverBaseDescription : $this->fetch('title') . ' : ' . $yuserverBaseTitle);
+$yuserverTitle = ($this->request->getAttribute('here') === '/' ? $yuserverBaseTitle . ': ' . $yuserverBaseDescription : $this->fetch('title') . ' : ' . $yuserverBaseTitle);
 $yuserverDescription = (!empty($this->fetch('description')) ? $this->fetch('description') : 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.');
 $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch('image') : '/favicon.ico'), true);
 ?>
 <!DOCTYPE html>
 <html>
-
-<head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $yuserverTitle ?></title>
-    <?= $this->Html->meta('keywords', $yuserverKeywords) ?>
-    <?= $this->Html->meta('description', $yuserverDescription) ?>
-    <?= $this->Html->meta(['property' => 'og:title', 'content' => $yuserverTitle]) ?>
-    <?= $this->Html->meta(['property' => 'og:description', 'content' => $yuserverDescription]) ?>
-    <?= $this->Html->meta(['property' => 'og:image', 'content' => $yuserverImage]) ?>
-    <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->meta(array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no')); ?>
-    <?= $this->Html->css('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900') ?>
-    <?= $this->Html->css('open-iconic-bootstrap.min') ?>
-    <?= $this->Html->css('animate') ?>
-    <?= $this->Html->css('owl.carousel.min') ?>
-    <?= $this->Html->css('owl.theme.default.min') ?>
-    <?= $this->Html->css('magnific-popup') ?>
-    <?= $this->Html->css('aos') ?>
-    <?= $this->Html->css('ionicons.min') ?>
-    <?= $this->Html->css('flaticon') ?>
-    <?= $this->Html->css('icomoon') ?>
-    <?= $this->Html->css('style') ?>
-    <?= $this->Html->script('jquery.min') ?>
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
-    <script data-ad-client="ca-pub-6607550822593779" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-</head>
-
-<body>
-    <nav class="navbar px-md-0 navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <?= $this->Html->link('Yu<i>server</i>.', '/', ['class' => 'navbar-brand', 'escape' => false]) ?>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-
-            <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><?= $this->Html->link('Home', '/', ['class' => 'nav-link']) ?></li>
-                    <li class="nav-item"><?= $this->Html->link('Articles', '/articles', ['class' => 'nav-link']) ?></li>
-                    <li class="nav-item"><?= $this->Html->link('Team', '/team', ['class' => 'nav-link']) ?></li>
-                    <li class="nav-item"><?= $this->Html->link('Contact', '/contact', ['class' => 'nav-link']) ?></li>
-                    <?php if ($this->request->getSession()->read('Auth.User.email')) { ?>
-                        <li class="nav-item"><?= $this->Html->link('New Post', '/new-post', ['class' => 'nav-link']) ?></li>
-                        <li class="nav-item"><?= $this->Html->link('Logout', '/logout', ['class' => 'nav-link']) ?></li>
-                    <?php } else { ?>
-                        <li class="nav-item"><?= $this->Html->link('Login', '/login', ['class' => 'nav-link']) ?></li>
-                    <?php } ?>
-                </ul>
+    <head>
+        <title><?= $yuserverTitle ?></title>
+        <?= $this->Html->charset() ?>
+        <?= $this->Html->meta('viewport', 'width=device-width, height=device-height, initial-scale=1.0') ?>
+        <?= $this->Html->meta(['http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge']) ?>
+        <?= $this->Html->meta('keywords', $yuserverKeywords) ?>
+        <?= $this->Html->meta('description', $yuserverDescription) ?>
+        <?= $this->Html->meta(['property' => 'og:title', 'content' => $yuserverTitle]) ?>
+        <?= $this->Html->meta(['property' => 'og:description', 'content' => $yuserverDescription]) ?>
+        <?= $this->Html->meta(['property' => 'og:image', 'content' => $yuserverImage]) ?>
+        <?= $this->Html->meta('icon') ?>
+        <?= $this->Html->css('https://fonts.googleapis.com/css?family=Montserrat:300,400,700%7CPoppins:300,400,500,700,900') ?>
+        <?= $this->Html->css('bootstrap') ?>
+        <?= $this->Html->css('fonts') ?>
+        <?= $this->Html->css('style') ?>
+        <?= $this->fetch('meta') ?>
+        <?= $this->fetch('css') ?>
+        <?= $this->fetch('script') ?>
+        <?php if (isset($previewAdds)) { ?>
+            <?= $this->Html->script('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', ['data-ad-client' => 'ca-pub-6607550822593779', 'async' => true]) ?>
+        <?php } ?>
+    </head>
+    <body>
+        <div class="preloader">
+            <div class="preloader-body">
+                <div class="cssload-container">
+                    <div class="cssload-speeding-wheel"></div>
+                </div>
+                <p>Loading...</p>
             </div>
         </div>
-    </nav>
-    <!-- END nav -->
-
-    <div class="hero-wrap js-fullheight" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <?php if (isset($header) && !empty($header)) { ?>
-                <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
-                    <div class="col-md-9 ftco-animate pb-5 text-center">
-                        <h1 class="mb-3 bread"><?= $header ?></h1>
-                        <p class="breadcrumbs"><span class="mr-2"><?= $this->Html->link('Home <i class="ion-ios-arrow-forward"></i>', '/', ['escape' => false]) ?></span> <?= (isset($heading_main) && !empty($heading_main)) ? '<span class="mr-2">' . $this->Html->link('Articles <i class="ion-ios-arrow-forward"></i>', '/articles', ['escape' => false]) . '</span>' : '' ?> <span><?= $header ?></span></p>
-                    </div>
-                </div>
-            <?php } else { ?>
-                <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
-                    <div class="col-md-12 ftco-animate">
-                        <h2 class="subheading">Hello! Welcome to</h2>
-                        <h1 class="mb-4 mb-md-0">Yuserver blog</h1>
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="text">
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                                    <div class="mouse">
-                                        <a href="#" class="mouse-icon">
-                                            <div class="mouse-wheel"><span class="ion-ios-arrow-round-down"></span></div>
+        <div class="page">
+            <header class="section page-header">
+                <!--RD Navbar-->
+                <div class="rd-navbar-wrap">
+                    <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                        <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+                        <div class="rd-navbar-aside-outer rd-navbar-collapse bg-gray-dark">
+                            <div class="rd-navbar-aside">
+                                <ul class="list-inline navbar-contact-list">
+                                    <li>
+                                        <div class="unit unit-spacing-xs align-items-center">
+                                            <div class="unit-left"><span class="icon text-middle fa-phone"></span></div>
+                                            <div class="unit-body"><a href="tel:+917210482353">+91 721 048 23 53</a></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="unit unit-spacing-xs align-items-center">
+                                            <div class="unit-left"><span class="icon text-middle fa-envelope"></span></div>
+                                            <div class="unit-body"><a href="mailto:support@yuserver.in">support@yuserver.in</a></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="unit unit-spacing-xs align-items-center">
+                                            <div class="unit-left"><span class="icon text-middle fa-map-marker"></span></div>
+                                            <div class="unit-body"><a href="#">C-15 Qutub Vihar,Near Dwarka Sec-19,New Delhi, INDIA</a></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="social-links">
+                                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-linkedin" href="#"></a></li>
+                                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="#"></a></li>
+                                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rd-navbar-main-outer">
+                            <div class="rd-navbar-main">
+                                <!--RD Navbar Panel-->
+                                <div class="rd-navbar-panel">
+                                    <!--RD Navbar Toggle-->
+                                    <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                                    <!--RD Navbar Brand-->
+                                    <div class="rd-navbar-brand">
+                                        <!--Brand-->
+                                        <a class="brand" href="/">
+                                            <?= $this->Html->image('logo-default-200x34.png', ['class' => 'brand-logo-dark', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
+                                            <?= $this->Html->image('logo-inverse-200x34.png', ['class' => 'brand-logo-light', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
                                         </a>
+                                    </div>
+                                </div>
+                                <div class="rd-navbar-main-element">
+                                    <div class="rd-navbar-nav-wrap">
+                                        <ul class="rd-navbar-nav">
+                                            <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="about.html">About</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="typography.html">Typography</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts</a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </nav>
                 </div>
+            </header>
+            <?= $this->fetch('content') ?>
+            <!--Footer-->
+            <?php if (isset($previewAdds)) { ?>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Horizontal Ad -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-6607550822593779"
+                     data-ad-slot="7274936351"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             <?php } ?>
-        </div>
-    </div>
-    <?= $this->fetch('content') ?>
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="logo"><a href="#">Yu<span>server</span>.</a></h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4 ml-md-5">
-                        <h2 class="ftco-heading-2">Information</h2>
-                        <ul class="list-unstyled">
-                            <li><?= $this->Html->link('<span class="ion-ios-arrow-forward mr-3"></span>Home', '/', ['escape' => false, 'class' => 'py-1 d-block']) ?></li>
-                            <li><?= $this->Html->link('<span class="ion-ios-arrow-forward mr-3"></span>About', '/about', ['escape' => false, 'class' => 'py-1 d-block']) ?></li>
-                            <li><?= $this->Html->link('<span class="ion-ios-arrow-forward mr-3"></span>Articles', '/articles', ['escape' => false, 'class' => 'py-1 d-block']) ?></li>
-                            <li><?= $this->Html->link('<span class="ion-ios-arrow-forward mr-3"></span>Contact', '/contact', ['escape' => false, 'class' => 'py-1 d-block']) ?></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                <li><span class="icon icon-map-marker"></span><span class="text"> C-15 Qutub Vihar,<br /> Near Dwarka Sec-19,<br /> New Delhi, INDIA</span></li>
-                                <li><a href="tel://+917210482353"><span class="icon icon-phone"></span><span class="text">+91 721 0482 353</span></a></li>
-                                <li><a href="mailto://nazim27294@gmail.com"><span class="icon icon-envelope"></span><span class="text">nazim27294@gmail.com</span></a></li>
-                            </ul>
+            <footer class="section footer-classic section-sm">
+                <div class="container">
+                    <div class="row row-30">
+                        <div class="col-lg-3 wow fadeInLeft">
+                            <!--Brand-->
+                            <a class="brand" href="/">
+                                <?= $this->Html->image('logo-default-200x34.png', ['class' => 'brand-logo-dark', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
+                                <?= $this->Html->image('logo-inverse-200x34.png', ['class' => 'brand-logo-light', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
+                            </a>
+                            <p class="footer-classic-description offset-top-0 offset-right-25">СonsultBiz provides a full range of business consulting & advisory services to small, medium, and international companies worldwide. We use innovations and experience to drive your success.</p>
+                        </div>
+                        <div class="col-lg-5 col-sm-12 wow fadeInUp">
+                            <P class="footer-classic-title">contact info</P>
+                            <div class="d-block offset-top-0">
+                                C-15 Qutub Vihar,
+                                <span class="d-lg-block"> Near Dwarka Sec-19, </span>
+                                <span class="d-lg-block"> New Delhi, INDIA</span>
+                            </div>
+                            <a class="d-inline-block accent-link" href="mailto:support@yuserver.in">support@yuserver.in</a>
+                            <a class="d-inline-block d-lg-block" href="tel:+917210482353">+91 721 048 23 53</a>
+                        </div>
+                        <div class="col-lg-4 wow fadeInLeft" data-wow-delay=".2s">
+                            <P class="footer-classic-title">newsletter</P>
+                            <form class="rd-mailform text-left footer-classic-subscribe-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                                <div class="form-wrap">
+                                    <label class="form-label" for="subscribe-email">Your Email Address</label>
+                                    <input class="form-input" id="subscribe-email" type="email" name="email" data-constraints="@Email @Required">
+                                </div>
+                                <div class="form-button group-sm text-center text-lg-left">
+                                    <button class="button button-primary button-circle" type="submit">sign up</button>
+                                </div>
+                            </form>
+                            <p>Be the first to find out about our latest news, updates, and special offers.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;<script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
+                <div class="container wow fadeInUp" data-wow-delay=".4s">
+                    <div class="footer-classic-aside">
+                        <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span>. All Rights Reserved. Developed by <?= $this->Html->link('Nazim', 'https://nazim.yuserver.in') ?></p>
+                        <ul class="social-links">
+                            <li><a class="fa fa-linkedin" href="#"></a></li>
+                            <li><a class="fa fa fa-twitter" href="#"></a></li>
+                            <li><a class="fa fa-facebook" href="#"></a></li>
+                            <li><a class="fa fa-instagram" href="#"></a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </footer>
         </div>
-    </footer>
-
-
-
-    <!-- loader -->
-    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
-            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
-
-
-    <?= $this->Html->script('jquery-migrate-3.0.1.min') ?>
-    <?= $this->Html->script('popper.min') ?>
-    <?= $this->Html->script('bootstrap.min') ?>
-    <?= $this->Html->script('jquery.easing.1.3') ?>
-    <?= $this->Html->script('jquery.waypoints.min') ?>
-    <?= $this->Html->script('jquery.stellar.min') ?>
-    <?= $this->Html->script('owl.carousel.min') ?>
-    <?= $this->Html->script('jquery.magnific-popup.min') ?>
-    <?= $this->Html->script('aos') ?>
-    <?= $this->Html->script('jquery.animateNumber.min') ?>
-    <?= $this->Html->script('scrollax.min') ?>
-    <?= $this->Html->script('AdclickYuserver') ?>
-    <?= $this->Html->script('main') ?>
-    <?= $this->Html->script('https://www.gstatic.com/firebasejs/7.24.0/firebase.js') ?>
-    <?= $this->Html->script('firebase-notification-push') ?>
-</body>
+        <div class="snackbars" id="form-output-global"></div>
+        <?= $this->Html->script('core.min') ?>
+        <?= $this->Html->script('script') ?>
+        <!--coded by Drel-->
+    </body>
 
 </html>
