@@ -71,4 +71,9 @@ class AppController extends Controller {
         //$this->loadComponent('Security');
     }
 
+    public function beforeRender(Event $event) {
+        $this->set('previewAdds', true);
+        parent::beforeRender($event);
+    }
+
 }
