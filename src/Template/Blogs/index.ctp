@@ -1,39 +1,71 @@
-<!--Main section-->
-<section class="section main-section parallax-scene-js" style="background:url('/img/bg-1-1700x803.jpg') no-repeat center center; background-size:cover;">
+<?php
+$this->assign('blog-class', 'active');
+?>
+<style>
+    .blog-image{
+        height:300px;
+        width: 300px;
+    }
+</style>
+<section class="section section-intro context-dark">
+    <div class="intro-bg" style="background: url(/img/intro-bg-1.jpg) no-repeat;background-size:cover;background-position: top center;"></div>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-xl-8 col-12">
-                <div class="main-decorated-box text-center text-xl-left">
-                    <h1 class="text-white text-xl-center wow slideInRight" data-wow-delay=".3s"><span class="align-top offset-top-30 d-inline-block font-weight-light prefix-text">the</span><span class="big font-weight-bold d-inline-flex offset-right-170">best</span><span class="biggest d-block d-xl-flex font-weight-bold">Solutions.</span></h1>
-                    <div class="decorated-subtitle text-italic text-white wow slideInLeft">Fresh Ideas for Your Business</div>
-                </div>
+            <div class="col-xl-8 text-center">
+                <h1 class="font-weight-bold wow fadeInLeft">Check Out Our Blogs</h1>
+                <p class="intro-description wow fadeInRight">Feel free to learn more about our team and company on this page. We are always happy to help you!</p>
             </div>
-            <div class="col-12 text-center offset-top-75" data-wow-delay=".2s"><a class="button-way-point d-inline-block text-center d-inline-flex flex-column justify-content-center" href="#" data-custom-scroll-to="about"><span class="fa-chevron-down"></span></a></div>
         </div>
     </div>
-    <div class="decorate-layer">
-        <div class="layer-1">
-            <div class="layer" data-depth=".20"><img src="/img/parallax-item-1-563x532.png" alt="" width="563" height="266"/>
+</section>
+<!--Blogs-->
+<section class="section section-sm position-relative">
+    <div class="container">
+        <?php foreach ($recent_articles as $recent_article) { ?>
+            <div class="row row-30">
+                <div class="col-lg-4">
+                    <div class="block-decorate-img wow fadeInLeft" data-wow-delay=".2s">
+                        <?= $this->Html->image('https://yuserver.in/img/' . $recent_article['blog_content']->image, ['class' => 'blog-image']) ?>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-12">
+                    <div class="offset-top-0 ml-5">
+                        <h3 class="wow fadeInLeft text-capitalize devider-bottom" data-wow-delay=".3s">
+                            <?=
+                            $this->Text->truncate(
+                                    $recent_article['blog_content']->title, 70, [
+                                'ellipsis' => '...',
+                                'exact' => false
+                                    ]
+                            )
+                            ?>
+                        </h3>
+                        <p class="offset-xl-30 wow fadeInUp" data-wow-delay=".4s">
+                            <?=
+                            $this->Text->truncate(
+                                    $recent_article['blog_content']->description, 365, [
+                                'ellipsis' => '...',
+                                'exact' => false
+                                    ]
+                            )
+                            ?> 
+                            <b style="white-space: nowrap;"> Created on : <?= date('d F, Y ', strtotime($recent_article['blog_content']->created)) ?></b></p>
+                        <p class="default-letter-spacing font-weight-bold text-gray-dark wow fadeInUp" data-wow-delay=".4s">
+                            <?= $this->Html->link('Read More', $recent_article->slug, ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-0 pull-right']) ?>
+                        </p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="layer-2">
-            <div class="layer" data-depth=".30"><img src="/img/parallax-item-2-276x343.png" alt="" width="276" height="171"/>
-            </div>
-        </div>
-        <div class="layer-3">
-            <div class="layer" data-depth=".40"><img src="/img/parallax-item-3-153x144.png" alt="" width="153" height="72"/>
-            </div>
-        </div>
-        <div class="layer-4">
-            <div class="layer" data-depth=".20"><img src="/img/parallax-item-4-69x74.png" alt="" width="69" height="37"/>
-            </div>
-        </div>
-        <div class="layer-5">
-            <div class="layer" data-depth=".40"><img src="/img/parallax-item-5-72x75.png" alt="" width="72" height="37"/>
-            </div>
-        </div>
-        <div class="layer-6">
-            <div class="layer" data-depth=".30"><img src="/img/parallax-item-6-45x54.png" alt="" width="45" height="27"/>
+        <?php } ?>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-lg-8 col-10 text-center">
+            <div class="block-27">
+                <ul class="pagination__list">
+                    <?= $this->Paginator->prev('<') ?>
+                    <?= $this->Paginator->numbers() ?>
+                    <?= $this->Paginator->next('>') ?>
+                </ul>
             </div>
         </div>
     </div>

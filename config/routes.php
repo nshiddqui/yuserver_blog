@@ -59,11 +59,11 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->applyMiddleware('csrf');
 
 
-    $Blogs = TableRegistry::get('Blogs');
-    $blogs = $Blogs->find();
-    foreach ($blogs as $blog) {
-        $routes->connect('/' . $blog->slug, ['controller' => 'Blogs', 'action' => 'view', 'title' => $blog->slug, $blog->slug]);
-    }
+//    $Blogs = TableRegistry::get('Blogs');
+//    $blogs = $Blogs->find();
+//    foreach ($blogs as $blog) {
+//        $routes->connect('/' . $blog->slug, ['controller' => 'Blogs', 'action' => 'view', 'title' => $blog->slug, $blog->slug]);
+//    }
 
 
     /**
@@ -71,16 +71,15 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Blogs', 'action' => 'index']);
-    $routes->connect('/articles', ['controller' => 'Blogs', 'action' => 'articles']);
-    $routes->connect('/team', ['controller' => 'Blogs', 'action' => 'team']);
-    $routes->connect('/about', ['controller' => 'Blogs', 'action' => 'team']);
-    $routes->connect('/contact', ['controller' => 'Blogs', 'action' => 'contact']);
-    $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
-    $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout']);
-    $routes->connect('/new-post', ['controller' => 'Blogs', 'action' => 'add']);
+    $routes->connect('/', ['controller' => 'Home', 'action' => 'index']);
+    $routes->connect('/team', ['controller' => 'Home', 'action' => 'team']);
+    $routes->connect('/about', ['controller' => 'Home', 'action' => 'about']);
+    $routes->connect('/contact', ['controller' => 'Home', 'action' => 'contact']);
+    $routes->connect('/blogs', ['controller' => 'Blogs', 'action' => 'index']);
     $routes->connect('/sitemap.xml', ['controller' => 'Blogs', 'action' => 'xmlReport']);
     $routes->connect('/add-token', ['controller' => 'Blogs', 'action' => 'addToken']);
+    $routes->connect('/*', ['controller' => 'Blogs', 'action' => 'view']);
+
     /**
      * Connect catchall routes for all controllers.
      *

@@ -9,13 +9,13 @@ use Kerox\Push\Adapter\Fcm;
 use Kerox\Push\Push;
 
 /**
- * Blogs Controller
+ * Default Controller
  *
  * @property \App\Model\Table\BlogsTable $Blogs
  *
  * @method \App\Model\Entity\Blog[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class BlogsController extends AppController {
+class HomeController extends AppController {
 
     /**
      * Index method
@@ -23,11 +23,19 @@ class BlogsController extends AppController {
      * @return \Cake\Http\Response|null
      */
     public function index() {
+        
+    }
+    
+    public function team() {
+        $this->set('header', 'About');
+    }
+
+    public function articles() {
         $recent_articles = $this->paginate($this->Blogs, [
             'contain' => ['BlogContents'],
-            'order' => ['BlogContents.created']
+            'order' => ['BlogContents.created'],
         ]);
-        $this->set('header', 'Blogs');
+        $this->set('header', 'Latest Articles');
         $this->set(compact('recent_articles'));
     }
 
@@ -54,15 +62,15 @@ class BlogsController extends AppController {
                     ],
                     'contain' => ['BlogContents', 'Comments'],
                 ])->first();
-//        $this->loadModel('BlogContents');
-//        $this->BlogContents->updateAll(['views' => $blog['blog_content']->views + 1], array('blog_id' => $blog->id));
-//        $recent_blogs = $this->Blogs->find('all', [
-//            'order' => [
-//                'Blogs.created'
-//            ],
-//            'contain' => ['BlogContents', 'Comments'],
-//            'limit' => '5'
-//        ]);
+        $this->loadModel('BlogContents');
+        $this->BlogContents->updateAll(['views' => $blog['blog_content']->views + 1], array('blog_id' => $blog->id));
+        $recent_blogs = $this->Blogs->find('all', [
+            'order' => [
+                'Blogs.created'
+            ],
+            'contain' => ['BlogContents', 'Comments'],
+            'limit' => '5'
+        ]);
         $this->set('header', 'Single Blog');
         $this->set('heading_main', 'Articles');
         $this->set(compact('comment', 'blog', 'recent_blogs'));

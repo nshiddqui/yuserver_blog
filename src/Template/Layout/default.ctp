@@ -3,11 +3,11 @@ $yuserverBaseTitle = 'Yuserver';
 $yuserverBaseDescription = 'the blogger and client best platform for blogging';
 $yuserverKeywords = (!empty($this->fetch('keywords')) ? $this->fetch('keywords') : 'yuserver, blogging, blogger, blog, developer');
 $yuserverTitle = ($this->request->getAttribute('here') === '/' ? $yuserverBaseTitle . ': ' . $yuserverBaseDescription : $this->fetch('title') . ' : ' . $yuserverBaseTitle);
-$yuserverDescription = (!empty($this->fetch('description')) ? $this->fetch('description') : 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.');
-$yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch('image') : '/favicon.ico'), true);
+$yuserverDescription = (!empty($this->fetch('description')) ? $this->fetch('description') : 'Yuserver provides a full range of business consulting & advisory services to small, medium, and international companies worldwide. We use innovations and experience to drive your success.');
+$yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch('image') : '/img/logo-blue.png'), true);
 ?>
 <!DOCTYPE html>
-<html>
+<html class="wide wow-animation" lang="en">
     <head>
         <title><?= $yuserverTitle ?></title>
         <?= $this->Html->charset() ?>
@@ -85,21 +85,28 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                                     <div class="rd-navbar-brand">
                                         <!--Brand-->
                                         <a class="brand" href="/">
-                                            <?= $this->Html->image('logo-default-200x34.png', ['class' => 'brand-logo-dark', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
-                                            <?= $this->Html->image('logo-inverse-200x34.png', ['class' => 'brand-logo-light', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
+                                            <?= $this->Html->image('logo-light.png', ['class' => 'brand-logo-dark', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
+                                            <?= $this->Html->image('logo-blue.png', ['class' => 'brand-logo-light', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="rd-navbar-main-element">
                                     <div class="rd-navbar-nav-wrap">
                                         <ul class="rd-navbar-nav">
-                                            <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home</a>
+                                            <li class="rd-nav-item <?= $this->fetch('about-class') ?>">
+                                                <?= $this->Html->link('About', '/about', ['class' => 'rd-nav-link']) ?>
                                             </li>
-                                            <li class="rd-nav-item"><a class="rd-nav-link" href="about.html">About</a>
+                                            <li class="rd-nav-item <?= $this->fetch('team-class') ?>">
+                                                <?= $this->Html->link('Our Team', '/team', ['class' => 'rd-nav-link']) ?>
                                             </li>
-                                            <li class="rd-nav-item"><a class="rd-nav-link" href="typography.html">Typography</a>
+                                            <li class="rd-nav-item <?= $this->fetch('adclick-class') ?>">
+                                                <?= $this->Html->link('Adclick', '/adclick', ['class' => 'rd-nav-link']) ?>
                                             </li>
-                                            <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts</a>
+                                            <li class="rd-nav-item <?= $this->fetch('contact-class') ?>">
+                                                <?= $this->Html->link('Contact', '/contact', ['class' => 'rd-nav-link']) ?>
+                                            </li>
+                                            <li class="rd-nav-item <?= $this->fetch('blog-class') ?>">
+                                                <?= $this->Html->link('Blogs', '/blogs', ['class' => 'rd-nav-link']) ?>
                                             </li>
                                         </ul>
                                     </div>
@@ -130,10 +137,12 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                         <div class="col-lg-3 wow fadeInLeft">
                             <!--Brand-->
                             <a class="brand" href="/">
-                                <?= $this->Html->image('logo-default-200x34.png', ['class' => 'brand-logo-dark', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
-                                <?= $this->Html->image('logo-inverse-200x34.png', ['class' => 'brand-logo-light', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
+                                <?= $this->Html->image('logo-light.png', ['class' => 'brand-logo-dark', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
+                                <?= $this->Html->image('logo-blue.png', ['class' => 'brand-logo-light', 'alt' => 'logo', 'width' => '100', 'height' => '17']) ?>
                             </a>
-                            <p class="footer-classic-description offset-top-0 offset-right-25">СonsultBiz provides a full range of business consulting & advisory services to small, medium, and international companies worldwide. We use innovations and experience to drive your success.</p>
+                            <p class="footer-classic-description offset-top-0 offset-right-25">
+                                Yuserver provides a full range of business consulting & advisory services to small, medium, and international companies worldwide. We use innovations and experience to drive your success.
+                            </p>
                         </div>
                         <div class="col-lg-5 col-sm-12 wow fadeInUp">
                             <P class="footer-classic-title">contact info</P>
@@ -145,7 +154,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                             <a class="d-inline-block accent-link" href="mailto:support@yuserver.in">support@yuserver.in</a>
                             <a class="d-inline-block d-lg-block" href="tel:+917210482353">+91 721 048 23 53</a>
                         </div>
-                        <div class="col-lg-4 wow fadeInLeft" data-wow-delay=".2s">
+                        <div class="col-lg-4 wow fadeInRight" data-wow-delay=".2s">
                             <P class="footer-classic-title">newsletter</P>
                             <form class="rd-mailform text-left footer-classic-subscribe-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
                                 <div class="form-wrap">
