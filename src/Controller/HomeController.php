@@ -9,13 +9,13 @@ use Kerox\Push\Adapter\Fcm;
 use Kerox\Push\Push;
 
 /**
- * Blogs Controller
+ * Default Controller
  *
  * @property \App\Model\Table\BlogsTable $Blogs
  *
  * @method \App\Model\Entity\Blog[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class BlogsController extends AppController {
+class HomeController extends AppController {
 
     /**
      * Index method
@@ -23,11 +23,19 @@ class BlogsController extends AppController {
      * @return \Cake\Http\Response|null
      */
     public function index() {
+        
+    }
+    
+    public function team() {
+        $this->set('header', 'About');
+    }
+
+    public function articles() {
         $recent_articles = $this->paginate($this->Blogs, [
             'contain' => ['BlogContents'],
-            'order' => ['BlogContents.created DESC']
+            'order' => ['BlogContents.created'],
         ]);
-        $this->set('header', 'Blogs');
+        $this->set('header', 'Latest Articles');
         $this->set(compact('recent_articles'));
     }
 
@@ -206,6 +214,12 @@ class BlogsController extends AppController {
             foreach ($topHeadlines['articles'] as $article) {
                 $slug = str_replace(' ', '-', preg_replace("~[^A-Za-z0-9 ]~i", "", $article['title']));
                 if ($this->Blogs->findBySlug($slug)->count() === 0) {
+                    $blog = $this->Blogs->newEntity([
+                        'contain' => ['BlogContents']
+                    ]);
+                    $target_dir = WWW_ROOT . "img/";
+                    $image_name = 'blog/' . $slug . '.png';
+                    file_put_contents($target_dir . $image_name, file_get_contents($article['urlToImage']));
                     $response = $this->httpClient->get('https://rapidapi.p.rapidapi.com/v0/article', [
                         'url' => $article['url'],
                             ], [
@@ -220,13 +234,6 @@ class BlogsController extends AppController {
                         echo 'Time execed';
                         die;
                     }
-                    $blog = $this->Blogs->newEntity([
-                        'contain' => ['BlogContents']
-                    ]);
-                    $target_dir = WWW_ROOT . "img/";
-                    $image_name = 'blog/' . $slug . '.png';
-                    file_put_contents($target_dir . $image_name, file_get_contents($article['urlToImage']));
-
                     $data = [
                         'slug' => $slug,
                         'blog_content' => [
