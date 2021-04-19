@@ -26,7 +26,7 @@
 			copyrightYear:           $( '.copyright-year' ),
 			owl:                     $( '.owl-carousel' ),
 			progressLinear:          $( '.progress-linear' ),
-			preloader:               0,
+			preloader:               $( '.preloader' ),
 			rdNavbar:                $( '.rd-navbar' ),
 			rdMailForm:              $( '.rd-mailform' ),
 			rdInputLabel:            $( '.form-label' ),
@@ -70,7 +70,7 @@
 	// Initialize scripts that require a loaded page
 	$window.on('load', function () {
 		// Page loader & Page transition
-		if (plugins.preloader.length && !isNoviBuilder) {
+		if (plugins.preloader && plugins.preloader.length && !isNoviBuilder) {
 			pageTransition({
 				target: document.querySelector( '.page' ),
 				delay: 0,
