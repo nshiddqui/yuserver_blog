@@ -262,59 +262,81 @@ class BlogsController extends AppController {
         die;
     }
 
-    public function xmlReport() {
-        $pages = $this->Blogs->find();
-        $urls = [
-            [
-                'loc' => Router::url('/', ['_full' => true]),
-                'lastmod' => date('Y-m-d'),
-                'changefreq' => 'daily',
-                'priority' => '1.00'
-            ],
-            [
-                'loc' => Router::url('/articles', ['_full' => true]),
-                'lastmod' => date('Y-m-d'),
-                'changefreq' => 'daily',
-                'priority' => '0.80'
-            ],
-            [
-                'loc' => Router::url('/team', ['_full' => true]),
-                'lastmod' => '2020-07-12',
-                'priority' => '0.80'
-            ],
-            [
-                'loc' => Router::url('/contact', ['_full' => true]),
-                'lastmod' => '2020-07-12',
-                'priority' => '0.80'
-            ],
-            [
-                'loc' => Router::url('/login', ['_full' => true]),
-                'lastmod' => '2020-07-12',
-                'priority' => '0.80'
-            ],
-            [
-                'loc' => Router::url('/about', ['_full' => true]),
-                'lastmod' => '2020-07-12',
-                'priority' => '0.80'
-            ]
-        ];
-        foreach ($pages as $page) {
-            $urls[] = [
-                'loc' => Router::url($page->slug, ['_full' => true]),
-                'lastmod' => $page->modified->format('Y-m-d'),
-                'priority' => '0.50'
-            ];
+    public function xmlReport($id = null) {
+        if (is_null($id)) {
+            $totalPages = $this->Blogs->find()->count();
+            $blog = $totalPages / 250;
+            $sitemap = [];
+            for ($i = 0; $i <= $blog; $i ++) {
+                $sitemap[] = [
+                    'sitemap' => [
+                        'loc' => Router::url("/{$i}/sitemap.xml", ['_full' => true])
+                    ]
+                ];
+            }
+            $this->set([
+                // Define an attribute on the root node.
+                '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+                'sitemapindex' => $sitemap
+            ]);
+            $this->set('_serialize', ['@xmlns', 'sitemapindex']);
+        } else {
+            if ($id == 0) {
+                $urls = [
+                    [
+                        'loc' => Router::url('/', ['_full' => true]),
+                        'lastmod' => date('Y-m-d'),
+                        'changefreq' => 'daily',
+                        'priority' => '1.00'
+                    ],
+                    [
+                        'loc' => Router::url('/articles', ['_full' => true]),
+                        'lastmod' => date('Y-m-d'),
+                        'changefreq' => 'daily',
+                        'priority' => '0.80'
+                    ],
+                    [
+                        'loc' => Router::url('/team', ['_full' => true]),
+                        'lastmod' => '2020-07-12',
+                        'priority' => '0.80'
+                    ],
+                    [
+                        'loc' => Router::url('/contact', ['_full' => true]),
+                        'lastmod' => '2020-07-12',
+                        'priority' => '0.80'
+                    ],
+                    [
+                        'loc' => Router::url('/login', ['_full' => true]),
+                        'lastmod' => '2020-07-12',
+                        'priority' => '0.80'
+                    ],
+                    [
+                        'loc' => Router::url('/about', ['_full' => true]),
+                        'lastmod' => '2020-07-12',
+                        'priority' => '0.80'
+                    ]
+                ];
+            } else {
+                $pages = $this->Blogs->find('all')->limit(250)->page($id);
+                foreach ($pages as $page) {
+                    $urls[] = [
+                        'loc' => Router::url($page->slug, ['_full' => true]),
+                        'lastmod' => $page->modified->format('Y-m-d'),
+                        'priority' => '0.50'
+                    ];
+                }
+            }
+            $this->set([
+                // Define an attribute on the root node.
+                '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
+                'url' => $urls
+            ]);
+            $this->set('_serialize', ['@xmlns', 'url']);
         }
         $this->RequestHandler->renderAs($this, 'xml');
 
         // Define a custom root node in the generated document.
         $this->set('_rootNode', 'urlset');
-        $this->set([
-            // Define an attribute on the root node.
-            '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
-            'url' => $urls
-        ]);
-        $this->set('_serialize', ['@xmlns', 'url']);
     }
 
     public function addToken() {
