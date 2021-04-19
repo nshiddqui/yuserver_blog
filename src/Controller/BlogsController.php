@@ -256,7 +256,7 @@ class BlogsController extends AppController {
 
                         // Make the push
                         $push->send();
-                    } catch (Exception $e) {
+                    } catch (\PDOException $e) {
                         
                     }
                     $count++;
