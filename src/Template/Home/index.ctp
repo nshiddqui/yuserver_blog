@@ -96,8 +96,8 @@ $this->assign('home-class', 'active');
                             <p class="box-default-description">Every project we work on is based on the creative solutions of any issues.</p><span class="box-default-icon novi-icon icon-lg mercury-icon-partners"></span>
                         </div>
                     </div>
-                    <?= $this->Html->link('Read More', '/adclick', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30']) ?>&nbsp;
-                    <?= $this->Html->link('See Demo', 'https://adclick.yuserver.in', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30', 'target' => '_BLANK']) ?>
+                    <?= $this->Html->link('Read More', '/labour', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30']) ?>&nbsp;
+                    <?= $this->Html->link('See Demo', 'https://gujarat-electrical.yuserver.in', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30', 'target' => '_BLANK']) ?>
                 </div>
             </div>
         </div>
