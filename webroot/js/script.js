@@ -26,7 +26,7 @@
 			copyrightYear:           $( '.copyright-year' ),
 			owl:                     $( '.owl-carousel' ),
 			progressLinear:          $( '.progress-linear' ),
-//			preloader:               $( '.preloader' ),
+			preloader:               0,
 			rdNavbar:                $( '.rd-navbar' ),
 			rdMailForm:              $( '.rd-mailform' ),
 			rdInputLabel:            $( '.form-label' ),
