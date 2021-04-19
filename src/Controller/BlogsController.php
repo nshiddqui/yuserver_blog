@@ -58,9 +58,9 @@ class BlogsController extends AppController {
         $this->BlogContents->updateAll(['views' => $blog['blog_content']->views + 1], array('blog_id' => $blog->id));
         $recent_blogs = $this->Blogs->find('all', [
             'order' => [
-                'Blogs.created'
+                'BlogContents.views DESC'
             ],
-            'contain' => ['BlogContents', 'Comments'],
+            'contain' => ['BlogContents'],
             'limit' => '10'
         ]);
         $this->set('header', 'Single Blog');
