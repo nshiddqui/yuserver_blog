@@ -275,7 +275,7 @@ class BlogsController extends AppController {
             $sitemap = [];
             for ($i = 0; $i <= $blog; $i ++) {
                 $sitemap[] = [
-                    'loc' => Router::url("/{$i}/sitemap.xml", ['_full' => true])
+                    'loc' => Router::url("/sitemap-{$i}.xml", ['_full' => true])
                 ];
             }
             $this->set([
