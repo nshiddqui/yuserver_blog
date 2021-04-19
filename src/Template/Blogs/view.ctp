@@ -162,7 +162,7 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
                                     ?></h3>
                                 <div class="meta">
                                     <div><span class="icon-calendar"></span> <?= date('M. d, Y', strtotime($recent_blog->created)) ?></div>
-                                    <div><span class="icon-chat"></span> <?= count($recent_blog['comments']) ?></div>
+                                    <div><span class="icon-chat"></span> <?= $recent_blog->views ?></div>
                                 </div>
                             </div>
                         </div>
