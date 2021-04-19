@@ -61,7 +61,7 @@ class BlogsController extends AppController {
                 'Blogs.created'
             ],
             'contain' => ['BlogContents', 'Comments'],
-            'limit' => '5'
+            'limit' => '10'
         ]);
         $this->set('header', 'Single Blog');
         $this->set('heading_main', 'Articles');
