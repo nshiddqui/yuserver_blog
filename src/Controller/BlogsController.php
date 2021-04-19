@@ -275,17 +275,16 @@ class BlogsController extends AppController {
             $sitemap = [];
             for ($i = 0; $i <= $blog; $i ++) {
                 $sitemap[] = [
-                    'sitemap' => [
-                        'loc' => Router::url("/{$i}/sitemap.xml", ['_full' => true])
-                    ]
+                    'loc' => Router::url("/{$i}/sitemap.xml", ['_full' => true])
                 ];
             }
             $this->set([
                 // Define an attribute on the root node.
                 '@xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9',
-                'sitemapindex' => $sitemap
+                'sitemap' => $sitemap
             ]);
-            $this->set('_serialize', ['@xmlns', 'sitemapindex']);
+            $this->set('_serialize', ['@xmlns', 'sitemap']);
+            $this->set('_rootNode', 'sitemapindex');
         } else {
             if ($id == 0) {
                 $urls = [
@@ -338,11 +337,10 @@ class BlogsController extends AppController {
                 'url' => $urls
             ]);
             $this->set('_serialize', ['@xmlns', 'url']);
+            // Define a custom root node in the generated document.
+            $this->set('_rootNode', 'urlset');
         }
         $this->RequestHandler->renderAs($this, 'xml');
-
-        // Define a custom root node in the generated document.
-        $this->set('_rootNode', 'urlset');
     }
 
     public function addToken() {
