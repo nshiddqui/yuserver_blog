@@ -78,6 +78,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/blogs', ['controller' => 'Blogs', 'action' => 'index']);
     $routes->connect('/sitemap.xml', ['controller' => 'Blogs', 'action' => 'xmlReport']);
     $routes->connect('/add-token', ['controller' => 'Blogs', 'action' => 'addToken']);
+    $routes->connect('/initial-blog', ['controller' => 'Blogs', 'action' => 'initialBlog']);
     $routes->connect('/*', ['controller' => 'Blogs', 'action' => 'view']);
 
     /**
