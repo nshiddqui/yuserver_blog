@@ -39,7 +39,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                 <p>Loading...</p>
             </div>
         </div>-->
-        <div class="page">
+        <div classNotExists="page">
             <header class="section page-header">
                 <!--RD Navbar-->
                 <div class="rd-navbar-wrap">
