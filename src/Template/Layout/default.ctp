@@ -31,14 +31,14 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
         <?php } ?>
     </head>
     <body>
-        <div class="preloader">
+<!--        <div class="preloader">
             <div class="preloader-body">
                 <div class="cssload-container">
                     <div class="cssload-speeding-wheel"></div>
                 </div>
                 <p>Loading...</p>
             </div>
-        </div>
+        </div>-->
         <div class="page">
             <header class="section page-header">
                 <!--RD Navbar-->
