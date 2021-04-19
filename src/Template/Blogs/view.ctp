@@ -106,7 +106,7 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
         <div class="row">
             <div class="col-lg-8 ftco-animate">
                 <p class="mb-5 fadeInLeft wow">
-                    <?= $this->Html->image('https://yuserver.in/img/' . $blog['blog_content']->image, ['alt' => $blog['blog_content']->image, 'class' => 'img-fluid w-100']) ?>
+                    <?= $this->Html->image($blog['blog_content']->image, ['alt' => $blog['blog_content']->image, 'class' => 'img-fluid w-100']) ?>
                 </p>
                 <h2 class="mb-3 fadeInUp wow"><?= $blog['blog_content']->title ?></h2>
                 <div class="fadeInLeft wow">
@@ -149,7 +149,7 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
                     <h3 class="mb-3">Recent Blog</h3>
                     <?php foreach ($recent_blogs as $recent_blog) { ?>
                         <div class="block-21 mb-4 d-flex  fadeInRight wow">
-                            <a class="blog-img mr-4" style="background-image: url(https://yuserver.in/img/<?= $recent_blog['blog_content']->image ?>);"></a>
+                            <a class="blog-img mr-4" style="background-image: url(/img/<?= $recent_blog['blog_content']->image ?>);"></a>
                             <div class="text">
                                 <h3 class="heading"><?=
                                     $this->Html->link(
