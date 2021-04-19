@@ -240,21 +240,25 @@ class BlogsController extends AppController {
                         ]
                     ];
                     $blog = $this->Blogs->patchEntity($blog, $data);
-                    $this->Blogs->save($blog);
-                    $adapter = new Fcm();
-                    $adapter
-                            ->setTokens($tokens)
-                            ->setNotification([
-                                'title' => $article['title'],
-                                'body' => $article['description'],
-                                'icon' => Router::url('/img/' . $image_name, ['_full' => true]),
-                                'click_action' => Router::url($slug, ['_full' => true])
-                    ]);
+                    try {
+                        $this->Blogs->save($blog);
+                        $adapter = new Fcm();
+                        $adapter
+                                ->setTokens($tokens)
+                                ->setNotification([
+                                    'title' => $article['title'],
+                                    'body' => $article['description'],
+                                    'icon' => Router::url('/img/' . $image_name, ['_full' => true]),
+                                    'click_action' => Router::url($slug, ['_full' => true])
+                        ]);
 
-                    $push = new Push($adapter);
+                        $push = new Push($adapter);
 
-                    // Make the push
-                    $push->send();
+                        // Make the push
+                        $push->send();
+                    } catch (Exception $e) {
+                        
+                    }
                     $count++;
                 }
             }
