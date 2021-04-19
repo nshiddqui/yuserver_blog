@@ -25,7 +25,7 @@ class BlogsController extends AppController {
     public function index() {
         $recent_articles = $this->paginate($this->Blogs, [
             'contain' => ['BlogContents'],
-            'order' => ['BlogContents.created']
+            'order' => ['BlogContents.created DESC']
         ]);
         $this->set('header', 'Blogs');
         $this->set(compact('recent_articles'));
@@ -54,15 +54,15 @@ class BlogsController extends AppController {
                     ],
                     'contain' => ['BlogContents', 'Comments'],
                 ])->first();
-//        $this->loadModel('BlogContents');
-//        $this->BlogContents->updateAll(['views' => $blog['blog_content']->views + 1], array('blog_id' => $blog->id));
-//        $recent_blogs = $this->Blogs->find('all', [
-//            'order' => [
-//                'Blogs.created'
-//            ],
-//            'contain' => ['BlogContents', 'Comments'],
-//            'limit' => '5'
-//        ]);
+        $this->loadModel('BlogContents');
+        $this->BlogContents->updateAll(['views' => $blog['blog_content']->views + 1], array('blog_id' => $blog->id));
+        $recent_blogs = $this->Blogs->find('all', [
+            'order' => [
+                'Blogs.created'
+            ],
+            'contain' => ['BlogContents', 'Comments'],
+            'limit' => '5'
+        ]);
         $this->set('header', 'Single Blog');
         $this->set('heading_main', 'Articles');
         $this->set(compact('comment', 'blog', 'recent_blogs'));
@@ -206,12 +206,6 @@ class BlogsController extends AppController {
             foreach ($topHeadlines['articles'] as $article) {
                 $slug = str_replace(' ', '-', preg_replace("~[^A-Za-z0-9 ]~i", "", $article['title']));
                 if ($this->Blogs->findBySlug($slug)->count() === 0) {
-                    $blog = $this->Blogs->newEntity([
-                        'contain' => ['BlogContents']
-                    ]);
-                    $target_dir = WWW_ROOT . "img/";
-                    $image_name = 'blog/' . $slug . '.png';
-                    file_put_contents($target_dir . $image_name, file_get_contents($article['urlToImage']));
                     $response = $this->httpClient->get('https://rapidapi.p.rapidapi.com/v0/article', [
                         'url' => $article['url'],
                             ], [
@@ -226,6 +220,13 @@ class BlogsController extends AppController {
                         echo 'Time execed';
                         die;
                     }
+                    $blog = $this->Blogs->newEntity([
+                        'contain' => ['BlogContents']
+                    ]);
+                    $target_dir = WWW_ROOT . "img/";
+                    $image_name = 'blog/' . $slug . '.png';
+                    file_put_contents($target_dir . $image_name, file_get_contents($article['urlToImage']));
+
                     $data = [
                         'slug' => $slug,
                         'blog_content' => [
