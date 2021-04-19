@@ -53,7 +53,7 @@ class AppController extends Controller {
     }
 
     public function beforeRender(Event $event) {
-//        $this->set('previewAdds', true);
+        $this->set('previewAdds', true);
         parent::beforeRender($event);
     }
 
