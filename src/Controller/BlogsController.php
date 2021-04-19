@@ -52,7 +52,9 @@ class BlogsController extends AppController {
                     'conditions' => [
                         'Blogs.slug' => $slug
                     ],
-                    'contain' => ['BlogContents', 'Comments'],
+                    'contain' => ['BlogContents', 'Comments' => [
+                            'sort' => ['Comments.created' => 'DESC']
+                        ]],
                 ])->first();
         $this->loadModel('BlogContents');
         $this->BlogContents->updateAll(['views' => $blog['blog_content']->views + 1], array('blog_id' => $blog->id));
