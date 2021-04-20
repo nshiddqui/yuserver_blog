@@ -86,6 +86,9 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
         color: #fff;
         background: black;
     }
+    .comment-list li p{
+        line-break: anywhere;
+    }
 
 
 </style>
