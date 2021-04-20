@@ -122,7 +122,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Horizontal Ad -->
                 <ins class="adsbygoogle"
-                     style="display:block"
+                     style="display:block;text-align:center"
                      data-ad-client="ca-pub-6607550822593779"
                      data-ad-slot="7274936351"
                      data-ad-format="auto"
