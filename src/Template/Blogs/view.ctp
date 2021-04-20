@@ -149,7 +149,7 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
                     <h3 class="mb-3">Recent Blog</h3>
                     <?php foreach ($recent_blogs as $recent_blog) { ?>
                         <div class="block-21 mb-4 d-flex  fadeInRight wow">
-                            <a class="blog-img mr-4" style="background-image: url(/img/<?= $recent_blog['blog_content']->image ?>);"></a>
+                            <a class="blog-img mr-4" style="background-image: url(/img/<?= $recent_blog['blog_content']->image ?>);background-size: cover;"></a>
                             <div class="text">
                                 <h3 class="heading"><?=
                                     $this->Html->link(
