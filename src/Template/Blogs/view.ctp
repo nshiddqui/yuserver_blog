@@ -86,9 +86,6 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
         color: #fff;
         background: black;
     }
-    .comment-list li p{
-        line-break: anywhere;
-    }
 
 
 </style>
@@ -126,7 +123,7 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
                                 <div class="comment-body">
                                     <h3><?= $comments->name ?></h3>
                                     <div class="meta mb-3"><?= date('F d, Y \a\t h:iA', strtotime($comments->created)) ?></div>
-                                    <p><?= $comments->message ?></p>
+                                    <pre><?= $comments->message ?></pre>
                                 </div>
                             </li>
                         <?php } ?>
