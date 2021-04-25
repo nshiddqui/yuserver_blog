@@ -43,6 +43,8 @@ class BlogsController extends AppController {
         $this->loadModel('Comments');
         $comment = $this->Comments->newEntity();
         if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $data['ip_address'] = $this->request->clientIp();
             $comment = $this->Comments->patchEntity($comment, $this->request->getData());
             if (strpos($comment->email, 'elighmail.com') === false) {
                 if ($this->Comments->save($comment)) {
