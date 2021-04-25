@@ -361,4 +361,13 @@ class BlogsController extends AppController {
         $this->set('_serialize', ['response']);
     }
 
+    public function subcribeUs() {
+        $this->loadModel('Emails');
+        $email = $this->Emails->newEntity();
+        $email = $this->Emails->patchEntity($email, ['email' => $this->request->getQuery('email')]);
+        $this->Emails->save($email);
+        echo 'MF000';
+        die;
+    }
+
 }
