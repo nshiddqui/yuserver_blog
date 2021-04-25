@@ -58,6 +58,12 @@ class CommentsTable extends Table {
                 ->allowEmptyString('id', null, 'create');
 
         $validator
+                ->scalar('ip_address')
+                ->maxLength('ip_address', 30)
+                ->requirePresence('ip_address', 'create')
+                ->notEmptyString('ip_address');
+
+        $validator
                 ->scalar('name')
                 ->maxLength('name', 255)
                 ->requirePresence('name', 'create')

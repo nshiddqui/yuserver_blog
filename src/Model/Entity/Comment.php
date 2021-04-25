@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $blog_id
+ * @property string $ip_address
  * @property string $name
  * @property string $email
  * @property string|null $website
@@ -29,6 +30,7 @@ class Comment extends Entity
      */
     protected $_accessible = [
         'blog_id' => true,
+        'ip_address' => true,
         'name' => true,
         'email' => true,
         'website' => true,
