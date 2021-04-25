@@ -271,7 +271,7 @@ class BlogsController extends AppController {
     public function xmlReport($id = null) {
         if (is_null($id)) {
             $totalPages = $this->Blogs->find()->count();
-            $blog = $totalPages / 250;
+            $blog = ($totalPages / 250) + 1;
             $sitemap = [];
             for ($i = 0; $i <= $blog; $i ++) {
                 $sitemap[] = [
