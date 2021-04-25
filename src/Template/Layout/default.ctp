@@ -160,7 +160,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                                 <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_H37Zv6ZSwHwPAD" async></script>
                             </form>
                             <P class="footer-classic-title">newsletter</P>
-                            <form class="rd-mailform text-left footer-classic-subscribe-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                            <form class="rd-mailform text-left footer-classic-subscribe-form" data-form-output="form-output-global" data-form-type="contact" method="get" action="/subcribe-us">
                                 <div class="form-wrap">
                                     <label class="form-label" for="subscribe-email">Your Email Address</label>
                                     <input class="form-input" id="subscribe-email" type="email" name="email" data-constraints="@Email @Required">
