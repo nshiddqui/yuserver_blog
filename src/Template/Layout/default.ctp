@@ -166,10 +166,10 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                                     <input class="form-input" id="subscribe-email" type="email" name="email" data-constraints="@Email @Required">
                                 </div>
                                 <div class="form-button group-sm text-center text-lg-left">
-                                    <button class="button button-primary button-circle" type="submit">sign up</button>
+                                    <button class="button button-primary button-circle" type="submit">subscribe</button>
                                 </div>
                             </form>
-                            <p>Be the first to find out about our latest news, updates, and special offers.</p>
+                            <p>Be the first to find out about our latest blogs, updates, and special offers.</p>
                         </div>
                     </div>
                 </div>
