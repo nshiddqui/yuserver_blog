@@ -70,7 +70,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                                 <ul class="social-links">
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-linkedin" href="#"></a></li>
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="#"></a></li>
-                                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="https://www.facebook.com/yuserver"></a></li>
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
                                 </ul>
                             </div>
@@ -179,7 +179,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                         <ul class="social-links">
                             <li><a class="fa fa-linkedin" href="#"></a></li>
                             <li><a class="fa fa fa-twitter" href="#"></a></li>
-                            <li><a class="fa fa-facebook" href="#"></a></li>
+                            <li><a class="fa fa-facebook" href="https://www.facebook.com/yuserver"></a></li>
                             <li><a class="fa fa-instagram" href="#"></a></li>
                         </ul>
                     </div>
