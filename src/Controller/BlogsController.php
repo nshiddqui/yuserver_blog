@@ -46,7 +46,7 @@ class BlogsController extends AppController {
             $data = $this->request->getData();
             $data['ip_address'] = $this->request->clientIp();
             $comment = $this->Comments->patchEntity($comment, $this->request->getData());
-            if (strpos($comment->email, 'elighmail.com') === false) {
+            if (substr_count(explode('@', $comment->email)[1], '.') === 1) {
                 if ($this->Comments->save($comment)) {
                     $email = new Email('default');
                     $email->from([$comment->email => $comment->name])
