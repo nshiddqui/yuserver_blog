@@ -56,7 +56,7 @@ class BlogsController extends AppController {
                     return $this->redirect($this->referer());
                 }
             }
-            $this->Flash->error(__('You are not allowed to comment on our website. please contact to our support on support@yuserver.in'));
+            $this->Flash->error(__('We are not allowed to use subdomain email on our website. please contact to our support on support@yuserver.in'));
         }
         $blog = $this->Blogs->find('all', [
                     'conditions' => [
