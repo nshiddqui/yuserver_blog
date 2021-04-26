@@ -39,9 +39,9 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                         <p>Loading...</p>
                     </div>
                 </div>-->
-        <form class="donation-button">
+<!--        <form class="donation-button">
             <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_H37Zv6ZSwHwPAD" async></script>
-        </form>
+        </form>-->
         <div classNotExists="page">
             <header class="section page-header">
                 <!--RD Navbar-->
