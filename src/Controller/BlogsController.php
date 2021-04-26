@@ -62,7 +62,8 @@ class BlogsController extends AppController {
                         'Blogs.slug' => $slug
                     ],
                     'contain' => ['BlogContents', 'Comments' => [
-                            'sort' => ['Comments.created' => 'DESC']
+                            'sort' => ['Comments.created' => 'DESC'],
+                            'limit' => 32
                         ]],
                 ])->first();
         $this->loadModel('BlogContents');
