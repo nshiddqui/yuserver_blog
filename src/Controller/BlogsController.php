@@ -46,17 +46,15 @@ class BlogsController extends AppController {
             $data = $this->request->getData();
             $data['ip_address'] = $this->request->clientIp();
             $comment = $this->Comments->patchEntity($comment, $this->request->getData());
-            if (substr_count(explode('@', $comment->email)[1], '.') === 1) {
-                if ($this->Comments->save($comment)) {
-                    $email = new Email('default');
-                    $email->from([$comment->email => $comment->name])
-                            ->to('support@yuserver.in')
-                            ->subject('Yuserver Comment')
-                            ->send($comment->message . '<br><br>Link : ' . $comment->website . '<br> Ref Link : ' . $this->referer());
-                    return $this->redirect($this->referer());
-                }
+            if ($this->Comments->save($comment)) {
+                $email = new Email('default');
+                $email->from([$comment->email => $comment->name])
+                        ->to('support@yuserver.in')
+                        ->subject('Yuserver Comment')
+                        ->send($comment->message . '<br><br>Link : ' . $comment->website . '<br> Ref Link : ' . $this->referer());
+                return $this->redirect($this->referer());
             }
-            $this->Flash->error(__('We are not allowed to use subdomain email on our website. please contact to our support on support@yuserver.in'));
+            $this->Flash->error(__('You are not allowed to comment on our website. please contact to our support on support@yuserver.in'));
         }
         $blog = $this->Blogs->find('all', [
                     'conditions' => [
