@@ -129,18 +129,19 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
                         <?php } ?>
                     </ul>
                     <!-- END comment-list -->
-
-                    <div class="comment-form-wrap pt-5">
-                        <h3 class="mb-5">Leave a comment</h3>
-                        <?= $this->Form->create($comment) ?>
-                        <?= $this->Form->hidden('blog_id', ['value' => $blog->id]) ?>
-                        <?= $this->Form->control('name') ?>
-                        <?= $this->Form->control('email') ?>
-                        <?= $this->Form->control('website') ?>
-                        <?= $this->Form->control('message') ?>
-                        <?= $this->Form->submit('Post Comment', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30']) ?>
-                        <?= $this->Form->end() ?>
-                    </div>
+                    <?php if ($comments->count() < 30) { ?>
+                        <div class="comment-form-wrap pt-5">
+                            <h3 class="mb-5">Leave a comment</h3>
+                            <?= $this->Form->create($comment) ?>
+                            <?= $this->Form->hidden('blog_id', ['value' => $blog->id]) ?>
+                            <?= $this->Form->control('name') ?>
+                            <?= $this->Form->control('email') ?>
+                            <?= $this->Form->control('website') ?>
+                            <?= $this->Form->control('message') ?>
+                            <?= $this->Form->submit('Post Comment', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30']) ?>
+                            <?= $this->Form->end() ?>
+                        </div>
+                    <?php } ?>
                 </div>
 
             </div> <!-- .col-md-8 -->
