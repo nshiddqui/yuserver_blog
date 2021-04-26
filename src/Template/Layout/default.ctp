@@ -31,14 +31,17 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
         <?php } ?>
     </head>
     <body>
-<!--        <div class="preloader">
-            <div class="preloader-body">
-                <div class="cssload-container">
-                    <div class="cssload-speeding-wheel"></div>
-                </div>
-                <p>Loading...</p>
-            </div>
-        </div>-->
+        <!--        <div class="preloader">
+                    <div class="preloader-body">
+                        <div class="cssload-container">
+                            <div class="cssload-speeding-wheel"></div>
+                        </div>
+                        <p>Loading...</p>
+                    </div>
+                </div>-->
+<!--        <form class="donation-button">
+            <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_H37Zv6ZSwHwPAD" async></script>
+        </form>-->
         <div classNotExists="page">
             <header class="section page-header">
                 <!--RD Navbar-->
@@ -70,7 +73,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                                 <ul class="social-links">
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-linkedin" href="#"></a></li>
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="#"></a></li>
-                                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                                    <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="https://www.facebook.com/yuserver"></a></li>
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
                                 </ul>
                             </div>
@@ -116,6 +119,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                     </nav>
                 </div>
             </header>
+            <?= $this->Flash->render() ?>
             <?= $this->fetch('content') ?>
             <!--Footer-->
             <?php if (isset($previewAdds)) { ?>
@@ -156,16 +160,16 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                         </div>
                         <div class="col-lg-4 wow fadeInRight" data-wow-delay=".2s">
                             <P class="footer-classic-title">newsletter</P>
-                            <form class="rd-mailform text-left footer-classic-subscribe-form" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                            <form class="rd-mailform text-left footer-classic-subscribe-form" data-form-output="form-output-global" data-form-type="contact" method="get" action="/subcribe-us">
                                 <div class="form-wrap">
                                     <label class="form-label" for="subscribe-email">Your Email Address</label>
                                     <input class="form-input" id="subscribe-email" type="email" name="email" data-constraints="@Email @Required">
                                 </div>
                                 <div class="form-button group-sm text-center text-lg-left">
-                                    <button class="button button-primary button-circle" type="submit">sign up</button>
+                                    <button class="button button-primary button-circle" type="submit">subscribe</button>
                                 </div>
                             </form>
-                            <p>Be the first to find out about our latest news, updates, and special offers.</p>
+                            <p>Be the first to find out about our latest blogs, updates, and special offers.</p>
                         </div>
                     </div>
                 </div>
@@ -175,7 +179,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                         <ul class="social-links">
                             <li><a class="fa fa-linkedin" href="#"></a></li>
                             <li><a class="fa fa fa-twitter" href="#"></a></li>
-                            <li><a class="fa fa-facebook" href="#"></a></li>
+                            <li><a class="fa fa-facebook" href="https://www.facebook.com/yuserver"></a></li>
                             <li><a class="fa fa-instagram" href="#"></a></li>
                         </ul>
                     </div>
@@ -185,6 +189,8 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
         <div class="snackbars" id="form-output-global"></div>
         <?= $this->Html->script('core.min') ?>
         <?= $this->Html->script('script') ?>
+        <?= $this->Html->script('https://www.gstatic.com/firebasejs/7.24.0/firebase.js') ?>
+        <?= $this->Html->script('firebase-notification-push') ?>
         <!--coded by Drel-->
     </body>
 

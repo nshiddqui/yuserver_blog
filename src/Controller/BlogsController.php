@@ -7,6 +7,7 @@ use Cake\Http\Client;
 use Cake\Routing\Router;
 use Kerox\Push\Adapter\Fcm;
 use Kerox\Push\Push;
+use Cake\Mailer\Email;
 
 /**
  * Blogs Controller
@@ -42,11 +43,18 @@ class BlogsController extends AppController {
         $this->loadModel('Comments');
         $comment = $this->Comments->newEntity();
         if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            $data['ip_address'] = $this->request->clientIp();
             $comment = $this->Comments->patchEntity($comment, $this->request->getData());
             if ($this->Comments->save($comment)) {
+                $email = new Email('default');
+                $email->from([$comment->email => $comment->name])
+                        ->to('support@yuserver.in')
+                        ->subject('Yuserver Comment')
+                        ->send($comment->message . '<br><br>Link : ' . $comment->website . '<br> Ref Link : ' . $this->referer());
                 return $this->redirect($this->referer());
             }
-            $this->Flash->error(__('The comment could not be saved. Please, try again.'));
+            $this->Flash->error(__('You are not allowed to comment on our website. please contact to our support on support@yuserver.in'));
         }
         $blog = $this->Blogs->find('all', [
                     'conditions' => [
@@ -351,6 +359,15 @@ class BlogsController extends AppController {
         $this->RequestHandler->renderAs($this, 'json');
         $this->set('response', 'Token added successfull');
         $this->set('_serialize', ['response']);
+    }
+
+    public function subcribeUs() {
+        $this->loadModel('Emails');
+        $email = $this->Emails->newEntity();
+        $email = $this->Emails->patchEntity($email, ['email' => $this->request->getQuery('email')]);
+        $this->Emails->save($email);
+        echo 'MF000';
+        die;
     }
 
 }

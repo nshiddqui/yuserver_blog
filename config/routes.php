@@ -81,6 +81,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/add-token', ['controller' => 'Blogs', 'action' => 'addToken']);
     $routes->connect('/initial-blog', ['controller' => 'Blogs', 'action' => 'initialBlog']);
     $routes->connect('/*', ['controller' => 'Blogs', 'action' => 'view']);
+    $routes->connect('/subcribe-us', ['controller' => 'Blogs', 'action' => 'subcribeUs']);
 
     /**
      * Connect catchall routes for all controllers.
