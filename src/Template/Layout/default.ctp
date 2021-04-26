@@ -189,6 +189,8 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
         <div class="snackbars" id="form-output-global"></div>
         <?= $this->Html->script('core.min') ?>
         <?= $this->Html->script('script') ?>
+        <?= $this->Html->script('https://www.gstatic.com/firebasejs/7.24.0/firebase.js') ?>
+        <?= $this->Html->script('firebase-notification-push') ?>
         <!--coded by Drel-->
     </body>
 
