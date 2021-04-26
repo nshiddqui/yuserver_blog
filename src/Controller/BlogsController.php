@@ -52,7 +52,7 @@ class BlogsController extends AppController {
                         ->setTo('support@yuserver.in')
                         ->setSubject('Yuserver Comment')
                         ->setEmailFormat('html')
-                        ->send($comment->message . '<br><br>Link : ' . $comment->website . '<br> Ref Link : ' . $this->referer());
+                        ->send($comment->message . '<br><hr><br>Link : ' . $comment->website . '<br> Ref Link : ' . $this->referer());
                 return $this->redirect($this->referer());
             }
             $this->Flash->error(__('You are not allowed to comment on our website. please contact to our support on support@yuserver.in'));
