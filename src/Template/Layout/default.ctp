@@ -39,6 +39,9 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                         <p>Loading...</p>
                     </div>
                 </div>-->
+        <form class="donation-button">
+            <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_H37Zv6ZSwHwPAD" async></script>
+        </form>
         <div classNotExists="page">
             <header class="section page-header">
                 <!--RD Navbar-->
@@ -156,9 +159,6 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                             <a class="d-inline-block d-lg-block" href="tel:+917210482353">+91 721 048 23 53</a>
                         </div>
                         <div class="col-lg-4 wow fadeInRight" data-wow-delay=".2s">
-                            <form class="donation-button">
-                                <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_H37Zv6ZSwHwPAD" async></script>
-                            </form>
                             <P class="footer-classic-title">newsletter</P>
                             <form class="rd-mailform text-left footer-classic-subscribe-form" data-form-output="form-output-global" data-form-type="contact" method="get" action="/subcribe-us">
                                 <div class="form-wrap">
