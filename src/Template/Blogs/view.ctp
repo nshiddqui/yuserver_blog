@@ -129,7 +129,7 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
                         <?php } ?>
                     </ul>
                     <!-- END comment-list -->
-                    <?php if ($comments->count() < 30) { ?>
+                    <?php if (count($blog['comments']) < 30) { ?>
                         <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5">Leave a comment</h3>
                             <?= $this->Form->create($comment) ?>
