@@ -49,8 +49,9 @@ class BlogsController extends AppController {
             if ($this->Comments->save($comment)) {
                 $email = new Email('default');
                 $email->from([$comment->email => $comment->name])
-                        ->to('support@yuserver.in')
-                        ->subject('Yuserver Comment')
+                        ->setTo('support@yuserver.in')
+                        ->setSubject('Yuserver Comment')
+                        ->setEmailFormat('html')
                         ->send($comment->message . '<br><br>Link : ' . $comment->website . '<br> Ref Link : ' . $this->referer());
                 return $this->redirect($this->referer());
             }
