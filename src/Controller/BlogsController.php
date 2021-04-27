@@ -208,7 +208,7 @@ class BlogsController extends AppController {
         $response = $this->httpClient->get('https://newsapi.org/v2/top-headlines', [
             'apiKey' => '58435a02bc2147078fb991cb34a65c4f',
             'category' => 'technology',
-            'country' => 'in',
+            'language' => 'en',
             'sortBy' => 'popularity',
         ]);
         $tokens = $this->Tokens->find('list')->toArray();
