@@ -204,6 +204,7 @@ class BlogsController extends AppController {
     public function initialBlog() {
         $this->loadModel('Tokens');
         $this->httpClient = new Client();
+        $adapter = new Fcm();
         $response = $this->httpClient->get('https://newsapi.org/v2/top-headlines', [
             'apiKey' => '58435a02bc2147078fb991cb34a65c4f',
             'category' => 'technology',
@@ -251,7 +252,6 @@ class BlogsController extends AppController {
                     $blog = $this->Blogs->patchEntity($blog, $data);
                     try {
                         $this->Blogs->save($blog);
-                        $adapter = new Fcm();
                         $adapter
                                 ->setTokens($tokens)
                                 ->setNotification([
@@ -264,11 +264,12 @@ class BlogsController extends AppController {
                         $push = new Push($adapter);
 
                         // Make the push
-                        $push->send();
+                        if ($push->send()) {
+                            $count++;
+                        }
                     } catch (\PDOException $e) {
                         
                     }
-                    $count++;
                 }
             }
         }
