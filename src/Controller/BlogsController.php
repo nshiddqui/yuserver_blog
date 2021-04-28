@@ -253,7 +253,7 @@ class BlogsController extends AppController {
                     try {
                         $this->Blogs->save($blog);
                         $adapter
-                                ->setTokens($tokens)
+                                ->setTokens(array_values($tokens))
                                 ->setNotification([
                                     'title' => $article['title'],
                                     'body' => $article['description'],
