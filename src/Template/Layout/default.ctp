@@ -31,6 +31,30 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
         <?php } ?>
     </head>
     <body>
+        <div class="modal fade" id="donation-box" tabindex="-1" role="dialog" aria-labelledby="DonationForm" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="container">
+                        <div class="row p-4">
+                            <div class="col-md-12 text-center p-4">
+                                <h3>Yuserver Donation</h3>
+                                <hr>
+                            </div>
+                            <div class="col-md-12">
+                                <?= $this->Form->create(null, ['url' => '/donation']) ?>
+                                <?= $this->Form->control('full_name') ?>
+                                <?= $this->Form->control('email', ['label' => 'Email Address']) ?>
+                                <?= $this->Form->control('amount', ['type' => 'number', 'placeholder' => '$', 'label' => 'Amount ($)', 'required' => true]) ?>
+                                <div class="text-center">
+                                    <?= $this->Form->submit('Donate With Paypal', ['class' => 'button button-primary button-circle button-lg']) ?>
+                                </div>
+                                <?= $this->Form->end() ?>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         <!--        <div class="preloader">
                     <div class="preloader-body">
                         <div class="cssload-container">
@@ -39,9 +63,9 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                         <p>Loading...</p>
                     </div>
                 </div>-->
-<!--        <form class="donation-button">
-            <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_H37Zv6ZSwHwPAD" async></script>
-        </form>-->
+        <div class="donation-button">
+            <button type="button" class="button button-primary button-circle button-lg" data-toggle="modal" data-target="#donation-box">Donate Now</button>
+        </div>
         <div classNotExists="page">
             <header class="section page-header">
                 <!--RD Navbar-->
