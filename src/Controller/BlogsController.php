@@ -372,4 +372,79 @@ class BlogsController extends AppController {
         die;
     }
 
+    public function donation() {
+        $this->request->allowMethod(['post']);
+        $this->loadModel('Donations');
+        $data = $this->request->getData();
+        $donation = $this->Donations->patchEntity($this->Donations->newEntity(), $data);
+        if ($this->Donations->save($donation)) {
+            $amount_number = number_format($data['amount'], 2);
+            $apiContext = new \PayPal\Rest\ApiContext(
+                    new \PayPal\Auth\OAuthTokenCredential(
+                    \Cake\Core\Configure::read('Paypal.client_id'), // ClientID
+                    \Cake\Core\Configure::read('Paypal.secrect_key')     // ClientSecret
+                    )
+            );
+            $apiContext->setConfig(['mode' => \Cake\Core\Configure::read('Paypal.mode')]);
+            $payer = new \PayPal\Api\Payer();
+            $payer->setPaymentMethod('paypal');
+
+            $amount = new \PayPal\Api\Amount();
+            $amount->setTotal(number_format($amount_number));
+            $amount->setCurrency('USD');
+
+            $transaction = new \PayPal\Api\Transaction();
+            $transaction->setAmount($amount);
+            $transaction->setInvoiceNumber($donation['id']);
+
+            $redirectUrls = new \PayPal\Api\RedirectUrls();
+            $redirectUrls->setReturnUrl(Router::url('/response/success', ['_full' => true]))
+                    ->setCancelUrl(Router::url('/response/cancle', ['_full' => true]));
+
+            $payment = new \PayPal\Api\Payment();
+            $payment->setIntent('sale')
+                    ->setPayer($payer)
+                    ->setTransactions(array($transaction))
+                    ->setRedirectUrls($redirectUrls);
+            try {
+                $payment->create($apiContext);
+                return $this->redirect($payment->getApprovalLink());
+            } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+                // This will print the detailed information on the exception.
+                //REALLY HELPFUL FOR DEBUGGING
+                echo $ex->getData();
+            }
+        }
+        $this->redirect($this->referer());
+    }
+
+    public function response($response) {
+        if ($response === 'success') {
+            $data = $this->request->getQuery();
+            if (empty($data['paymentId']) || empty($data['PayerID'])) {
+                throw new Exception('The response is missing the paymentId and PayerID');
+            }
+            $apiContext = new \PayPal\Rest\ApiContext(
+                    new \PayPal\Auth\OAuthTokenCredential(
+                    \Cake\Core\Configure::read('Paypal.client_id'), // ClientID
+                    \Cake\Core\Configure::read('Paypal.secrect_key')     // ClientSecret
+                    )
+            );
+            $apiContext->setConfig(['mode' => \Cake\Core\Configure::read('Paypal.mode')]);
+            $payment = \PayPal\Api\Payment::get($data['paymentId'], $apiContext);
+            $this->loadModel('Donations');
+            $donation = $this->Donations->get($payment->transactions[0]->invoice_number);
+            $donation = $this->Donations->patchEntity($donation, [
+                'transaction_id' => $payment->getId(),
+                'payment_amount' => $payment->transactions[0]->amount->total,
+                'status' => $payment->getState(),
+            ]);
+            $this->Donations->save($donation);
+            $this->Flash->success('Thank you for your donation.');
+        } else {
+            $this->Flash->error('Sorry, Your donation has been canceled.');
+        }
+        return $this->redirect('/');
+    }
+
 }
