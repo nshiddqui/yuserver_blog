@@ -80,6 +80,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/initial-blog', ['controller' => 'Blogs', 'action' => 'initialBlog']);
     $routes->connect('/*', ['controller' => 'Blogs', 'action' => 'view']);
     $routes->connect('/subcribe-us', ['controller' => 'Blogs', 'action' => 'subcribeUs']);
+    $routes->connect('/donation', ['controller' => 'Blogs', 'action' => 'donation']);
+    $routes->connect('/response/*', ['controller' => 'Blogs', 'action' => 'response']);
 
     /**
      * Connect catchall routes for all controllers.

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -12,7 +13,6 @@
  * @since         0.10.8
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-
 /*
  * Configure paths required to find CakePHP + general filepath constants
  */
@@ -185,14 +185,16 @@ ServerRequest::addDetector('tablet', function ($request) {
  * @link https://book.cakephp.org/3.0/en/core-libraries/internationalization-and-localization.html#parsing-localized-datetime-data
  */
 Type::build('time')
-    ->useImmutable();
+        ->useImmutable();
 Type::build('date')
-    ->useImmutable();
+        ->useImmutable();
 Type::build('datetime')
-    ->useImmutable();
+        ->useImmutable();
 Type::build('timestamp')
-    ->useImmutable();
+        ->useImmutable();
 
+
+Configure::load('paypal');
 /*
  * Custom Inflector rules, can be set to correctly pluralize or singularize
  * table, model, controller names or whatever other string is passed to the
