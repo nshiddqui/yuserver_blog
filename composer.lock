@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4284b45932468c6b7c187056728f8095",
+    "content-hash": "8d9607b802fc81ed66db413acdd448aa",
     "packages": [
         {
             "name": "aura/intl",
@@ -51,6 +51,37 @@
                 "localization"
             ],
             "time": "2017-01-20T05:00:11+00:00"
+        },
+        {
+            "name": "awallef/cakephp-cache",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/awallef/cakephp-cache.git",
+                "reference": "2bed5a987668a8faf604b04f3b80fa5fbc1cf1d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/awallef/cakephp-cache/zipball/2bed5a987668a8faf604b04f3b80fa5fbc1cf1d0",
+                "reference": "2bed5a987668a8faf604b04f3b80fa5fbc1cf1d0",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^3.3",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Awallef\\Cache\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "CakePHP render caching",
+            "time": "2017-08-31T10:58:52+00:00"
         },
         {
             "name": "cakephp/cakephp",
@@ -4556,6 +4587,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "awallef/cakephp-cache": 20,
         "psy/psysh": 0
     },
     "prefer-stable": true,

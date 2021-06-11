@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -12,6 +13,7 @@
  * @since     3.3.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App;
 
 use Cake\Core\Configure;
@@ -20,6 +22,7 @@ use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Awallef\Cache\Middleware\ResponseCacheMiddleware;
 
 /**
  * Application setup class.
@@ -27,13 +30,12 @@ use Cake\Routing\Middleware\RoutingMiddleware;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
-{
+class Application extends BaseApplication {
+
     /**
      * {@inheritDoc}
      */
-    public function bootstrap()
-    {
+    public function bootstrap() {
         // Call parent to load bootstrap from files.
         parent::bootstrap();
 
@@ -51,6 +53,8 @@ class Application extends BaseApplication
 
         $this->addPlugin('Kerox/Push');
 
+        $this->addPlugin('Awallef/Cache');
+
         // Load more plugins here
     }
 
@@ -60,25 +64,25 @@ class Application extends BaseApplication
      * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
      * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
      */
-    public function middleware($middlewareQueue)
-    {
+    public function middleware($middlewareQueue) {
         $middlewareQueue
-            // Catch any exceptions in the lower layers,
-            // and make an error page/response
-            ->add(new ErrorHandlerMiddleware(null, Configure::read('Error')))
+                // Catch any exceptions in the lower layers,
+                // and make an error page/response
+                ->add(new ErrorHandlerMiddleware(null, Configure::read('Error')))
 
-            // Handle plugin/theme assets like CakePHP normally does.
-            ->add(new AssetMiddleware([
-                'cacheTime' => Configure::read('Asset.cacheTime')
-            ]))
+                // Handle plugin/theme assets like CakePHP normally does.
+                ->add(new AssetMiddleware([
+                    'cacheTime' => Configure::read('Asset.cacheTime')
+                ]))
 
-            // Add routing middleware.
-            // If you have a large number of routes connected, turning on routes
-            // caching in production could improve performance. For that when
-            // creating the middleware instance specify the cache config name by
-            // using it's second constructor argument:
-            // `new RoutingMiddleware($this, '_cake_routes_')`
-            ->add(new RoutingMiddleware($this));
+                // Add routing middleware.
+                // If you have a large number of routes connected, turning on routes
+                // caching in production could improve performance. For that when
+                // creating the middleware instance specify the cache config name by
+                // using it's second constructor argument:
+                // `new RoutingMiddleware($this, '_cake_routes_')`
+                ->add(new RoutingMiddleware($this))
+                ->add(ResponseCacheMiddleware::class);
 
         return $middlewareQueue;
     }
@@ -86,8 +90,7 @@ class Application extends BaseApplication
     /**
      * @return void
      */
-    protected function bootstrapCli()
-    {
+    protected function bootstrapCli() {
         try {
             $this->addPlugin('Bake');
         } catch (MissingPluginException $e) {
@@ -98,4 +101,5 @@ class Application extends BaseApplication
 
         // Load more plugins here
     }
+
 }
