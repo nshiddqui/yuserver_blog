@@ -135,6 +135,11 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                                             <li class="rd-nav-item <?= $this->fetch('blog-class') ?>">
                                                 <?= $this->Html->link('Blogs', '/blogs', ['class' => 'rd-nav-link']) ?>
                                             </li>
+                                            <li class="rd-nav-item">
+                                                <div class="rd-nav-link search-bar">
+                                                    <div class="gcse-search"></div>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -215,6 +220,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
         <?= $this->Html->script('script') ?>
         <?= $this->Html->script('https://www.gstatic.com/firebasejs/7.24.0/firebase.js') ?>
         <?= $this->Html->script('firebase-notification-push') ?>
+        <?= $this->Html->script('https://cse.google.com/cse.js?cx=8a971879e1a60a4ad') ?>
         <!--coded by Drel-->
     </body>
 
