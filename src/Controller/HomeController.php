@@ -17,6 +17,11 @@ use Kerox\Push\Push;
  */
 class HomeController extends AppController {
 
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->Auth->allow('*');
+        parent::beforeFilter($event);
+    }
+    
     /**
      * Index method
      *
