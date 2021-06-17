@@ -62,7 +62,7 @@ class AppController extends Controller {
     }
 
     public function beforeRender(Event $event) {
-//        $this->set('previewAdds', true);
+        $this->set('previewAdds', true);
         $this->set('authUser', $this->Auth->user());
         parent::beforeRender($event);
     }
