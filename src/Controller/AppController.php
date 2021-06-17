@@ -47,7 +47,7 @@ class AppController extends Controller {
         $this->loadComponent('Flash');
         $this->loadComponent('Awallef/Cache.ActionCache');
         $this->loadComponent('Auth', [
-            'loginRedirect' => '/create-post',
+            'loginRedirect' => '/login',
             'authenticate' => [
                 'Form' => [
                     'fields' => ['username' => 'email']
