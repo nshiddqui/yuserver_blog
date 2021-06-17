@@ -17,6 +17,11 @@ use Cake\Mailer\Email;
  * @method \App\Model\Entity\Blog[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class BlogsController extends AppController {
+    
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->Auth->allow('*');
+        parent::beforeFilter($event);
+    }
 
     /**
      * Index method
