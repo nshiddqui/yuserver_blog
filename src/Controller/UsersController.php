@@ -15,7 +15,7 @@ class UsersController extends AppController {
 
     public function initialize() {
         parent::initialize();
-        $this->Auth->allow(['logout', 'add']);
+        $this->Auth->allow(['logout', 'add', 'login']);
     }
 
     /**
@@ -56,7 +56,7 @@ class UsersController extends AppController {
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect('/login');
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }

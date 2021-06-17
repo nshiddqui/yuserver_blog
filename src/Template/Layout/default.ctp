@@ -95,6 +95,12 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
                                     </li>
                                 </ul>
                                 <ul class="social-links">
+                                    <?php if (!$authUser) { ?>
+                                        <li><?= $this->Html->link('Login', '/login', ['class' => 'icon icon-sm icon-circle icon-circle-md icon-bg-white fa-sign-in']) ?></li>
+                                        <li><?= $this->Html->link('Register', '/register', ['class' => 'icon icon-sm icon-circle icon-circle-md icon-bg-white fa-sign-in']) ?></li>
+                                    <?php } else { ?>
+                                        <li><?= $this->Html->link('Logout', '/logout', ['class' => 'icon icon-sm icon-circle icon-circle-md icon-bg-white fa-sign-in']) ?></li>
+                                    <?php } ?>
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-linkedin" href="#"></a></li>
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="#"></a></li>
                                     <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="https://www.facebook.com/yuserver"></a></li>

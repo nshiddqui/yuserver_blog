@@ -70,6 +70,10 @@ Router::scope('/', function (RouteBuilder $routes) {
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
     $routes->connect('/', ['controller' => 'Home', 'action' => 'index']);
+    $routes->connect('/create-post', ['controller' => 'Blogs', 'action' => 'add']);
+    $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+    $routes->connect('/register', ['controller' => 'Users', 'action' => 'add']);
+    $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout']);
     $routes->connect('/team', ['controller' => 'Home', 'action' => 'team']);
     $routes->connect('/about', ['controller' => 'Home', 'action' => 'about']);
     $routes->connect('/contact', ['controller' => 'Home', 'action' => 'contact']);

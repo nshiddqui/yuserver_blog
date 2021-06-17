@@ -46,6 +46,14 @@ class AppController extends Controller {
         ]);
         $this->loadComponent('Flash');
         $this->loadComponent('Awallef/Cache.ActionCache');
+        $this->loadComponent('Auth', [
+            'loginRedirect' => '/create-post',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => ['username' => 'email']
+                ]
+            ]
+        ]);
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -54,7 +62,8 @@ class AppController extends Controller {
     }
 
     public function beforeRender(Event $event) {
-        $this->set('previewAdds', true);
+//        $this->set('previewAdds', true);
+        $this->set('authUser', $this->Auth->user());
         parent::beforeRender($event);
     }
 
