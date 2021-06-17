@@ -55,7 +55,6 @@ class AppController extends Controller {
             ],
             'loginAction' => '/login',
         ]);
-        $this->Auth->setConfig('authorize', ['Controller' => ['Home', 'Blogs']]);
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -63,9 +62,13 @@ class AppController extends Controller {
         //$this->loadComponent('Security');
     }
 
+    public function beforeFilter(Event $event) {
+        $this->set('authUser', $this->Auth->user());
+        parent::beforeFilter($event);
+    }
+
     public function beforeRender(Event $event) {
         $this->set('previewAdds', true);
-        $this->set('authUser', $this->Auth->user());
         parent::beforeRender($event);
     }
 

@@ -16,6 +16,11 @@ use Kerox\Push\Push;
  * @method \App\Model\Entity\Blog[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class HomeController extends AppController {
+    
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->Auth->allow();
+        parent::beforeFilter($event);
+    }
 
     /**
      * Index method

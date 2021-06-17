@@ -18,6 +18,12 @@ use Cake\Mailer\Email;
  */
 class BlogsController extends AppController {
 
+    public function beforeFilter(\Cake\Event\Event $event) {
+        $this->Auth->allow();
+        $this->Auth->deny(['add']);
+        parent::beforeFilter($event);
+    }
+
     /**
      * Index method
      *
