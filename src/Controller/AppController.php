@@ -52,7 +52,8 @@ class AppController extends Controller {
                 'Form' => [
                     'fields' => ['username' => 'email']
                 ]
-            ]
+            ],
+            'loginAction' => '/login',
         ]);
         $this->Auth->setConfig('authorize', ['Controller' => ['Home', 'Blogs']]);
         /*
