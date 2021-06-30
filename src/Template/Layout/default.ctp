@@ -25,7 +25,6 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
         <?= $this->Html->css('style') ?>
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
-        <?= $this->fetch('script') ?>
         <?php if (isset($previewAdds)) { ?>
             <?= $this->Html->script('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', ['data-ad-client' => 'ca-pub-6607550822593779', 'async' => true]) ?>
         <?php } ?>
@@ -227,6 +226,7 @@ $yuserverImage = $this->Url->build((!empty($this->fetch('image')) ? $this->fetch
         <?= $this->Html->script('https://www.gstatic.com/firebasejs/7.24.0/firebase.js') ?>
         <?= $this->Html->script('firebase-notification-push') ?>
         <?= $this->Html->script('https://cse.google.com/cse.js?cx=8a971879e1a60a4ad') ?>
+        <?= $this->fetch('script') ?>
         <!--coded by Drel-->
     </body>
 

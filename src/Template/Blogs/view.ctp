@@ -4,6 +4,8 @@ $this->assign('description', $blog['blog_content']->description);
 $this->assign('keywords', $blog['blog_content']->keywords);
 $this->assign('image', '/img/' . $blog['blog_content']->image);
 ?>
+<?= $this->Html->css('jquery.floating-social-share.min', ['block' => true]) ?>
+<?= $this->Html->script('jquery.floating-social-share.min', ['block' => true]) ?>
 <style>
     .block-21 .blog-img {
         display: block;
@@ -200,3 +202,13 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
         </div>
     </div>
 </section>
+<?= $this->Html->scriptStart(['block' => true]) ?>
+$("body").floatingSocialShare({
+    buttons: [
+      "facebook", "linkedin", "pinterest", "reddit", 
+      "telegram", "twitter", "whatsapp"
+    ],
+    text: "<?= $blog['blog_content']->title ?>",
+    url: "<?= $this->Url->build(null, true) ?>"
+});
+<?= $this->Html->scriptEnd(); ?>
