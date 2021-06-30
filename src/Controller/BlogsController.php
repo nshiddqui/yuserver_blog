@@ -45,23 +45,26 @@ class BlogsController extends AppController {
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($slug = null) {
-        $this->loadModel('Comments');
-        $comment = $this->Comments->newEntity();
-        if ($this->request->is('post')) {
-            $data = $this->request->getData();
-            $data['ip_address'] = $this->request->clientIp();
-            $comment = $this->Comments->patchEntity($comment, $data);
-            if ($this->Comments->save($comment)) {
-                $email = new Email('default');
-                $email->from([$comment->email => $comment->name])
-                        ->setTo('support@yuserver.in')
-                        ->setSubject('Yuserver Comment')
-                        ->setEmailFormat('html')
-                        ->send($comment->message . '<br><hr><br>Link : ' . $comment->website . '<br> Ref Link : ' . $this->referer());
-                return $this->redirect($this->referer());
+    public function view($slug = null, $comment = false) {
+        if ($comment) {
+            $this->loadModel('Comments');
+            $comment = $this->Comments->newEntity();
+            if ($this->request->is('post')) {
+                $data = $this->request->getData();
+                $data['ip_address'] = $this->request->clientIp();
+                $comment = $this->Comments->patchEntity($comment, $data);
+                if ($this->Comments->save($comment)) {
+                    $email = new Email('default');
+                    $email->from([$comment->email => $comment->name])
+                            ->setTo('support@yuserver.in')
+                            ->setSubject('Yuserver Comment')
+                            ->setEmailFormat('html')
+                            ->send($comment->message . '<br><hr><br>Link : ' . $comment->website . '<br> Ref Link : ' . $this->referer());
+                    return $this->redirect(['action' => 'view', $slug]);
+                }
+                $this->Flash->error(__('You are not allowed to comment on our website. please contact to our support on support@yuserver.in'));
             }
-            $this->Flash->error(__('You are not allowed to comment on our website. please contact to our support on support@yuserver.in'));
+            $this->set(compact('comment'));
         }
         $blog = $this->Blogs->find('all', [
                     'conditions' => [
@@ -82,7 +85,7 @@ class BlogsController extends AppController {
         ]);
         $this->set('header', 'Single Blog');
         $this->set('heading_main', 'Articles');
-        $this->set(compact('comment', 'blog', 'recent_blogs'));
+        $this->set(compact('blog', 'recent_blogs'));
     }
 
     /**

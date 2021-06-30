@@ -131,18 +131,22 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
                         <?php } ?>
                     </ul>
                     <!-- END comment-list -->
-                    <?php if (count($blog['comments']) < 30) { ?>
-                        <div class="comment-form-wrap pt-5">
-                            <h3 class="mb-5">Leave a comment</h3>
-                            <?= $this->Form->create($comment) ?>
-                            <?= $this->Form->hidden('blog_id', ['value' => $blog->id]) ?>
-                            <?= $this->Form->control('name') ?>
-                            <?= $this->Form->control('email') ?>
-                            <?= $this->Form->control('website') ?>
-                            <?= $this->Form->control('message') ?>
-                            <?= $this->Form->submit('Post Comment', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30']) ?>
-                            <?= $this->Form->end() ?>
-                        </div>
+                    <?php if (isset($comment)) { ?>
+                        <?php if (count($blog['comments']) < 30) { ?>
+                            <div class="comment-form-wrap pt-5">
+                                <h3 class="mb-5">Leave a comment</h3>
+                                <?= $this->Form->create($comment) ?>
+                                <?= $this->Form->hidden('blog_id', ['value' => $blog->id]) ?>
+                                <?= $this->Form->control('name') ?>
+                                <?= $this->Form->control('email') ?>
+                                <?= $this->Form->control('website') ?>
+                                <?= $this->Form->control('message') ?>
+                                <?= $this->Form->submit('Post Comment', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30']) ?>
+                                <?= $this->Form->end() ?>
+                            </div>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <?= $this->Html->link('Leave a comment', $this->Url->build(null) . '/1', ['class' => 'button-width-190 button-primary button-circle button-lg button offset-top-30']) ?>
                     <?php } ?>
                 </div>
 
@@ -204,11 +208,11 @@ $this->assign('image', '/img/' . $blog['blog_content']->image);
 </section>
 <?= $this->Html->scriptStart(['block' => true]) ?>
 $("body").floatingSocialShare({
-    buttons: [
-      "facebook", "linkedin", "pinterest", "reddit", 
-      "telegram", "twitter", "whatsapp"
-    ],
-    text: "<?= $blog['blog_content']->title ?>",
-    url: "<?= $this->Url->build(null, true) ?>"
+buttons: [
+"facebook", "linkedin", "pinterest", "reddit", 
+"telegram", "twitter", "whatsapp"
+],
+text: "<?= $blog['blog_content']->title ?>",
+url: "<?= $this->Url->build(null, true) ?>"
 });
 <?= $this->Html->scriptEnd(); ?>
